@@ -1,0 +1,171 @@
+---
+// Life Areas section - replaces BrandsSection with user-centric framing
+import { Icon } from 'astro-icon/components';
+
+const lifeAreas = [
+  {
+    id: 'focus-rest',
+    name: 'Focus & Rest',
+    icon: 'heroicons:sparkles',
+    color: '#5B9BD5',
+    struggle: 'Executive function, sleep issues, procrastination, burnout recovery',
+    builds: [
+      'Focus & Flow planner (Spring 2026)',
+      'Sleep audio & wind-down content',
+      'Weekly productivity guides',
+      'Notion templates with accountability'
+    ]
+  },
+  {
+    id: 'self-create',
+    name: 'Self & Create',
+    icon: 'heroicons:paint-brush',
+    color: '#F67280',
+    struggle: 'Identity expression, masking fatigue, sensory sensitivities, finishing creative projects',
+    builds: [
+      'ADHD-positive apparel (31+ Etsy sales)',
+      'Neurodivergent journals & stickers',
+      'Photography & visual templates',
+      'Audio production guides'
+    ]
+  },
+  {
+    id: 'build-ship',
+    name: 'Build & Ship',
+    icon: 'heroicons:rocket-launch',
+    color: '#FFDD57',
+    struggle: 'Dev productivity, finishing side projects, automation overwhelm, shipping fatigue',
+    builds: [
+      'n8n automation workflows',
+      'GitHub code templates',
+      'Neuro-pipeline content factory',
+      'Shipping frameworks & checklists'
+    ]
+  },
+  {
+    id: 'move-explore',
+    name: 'Move & Explore',
+    icon: 'heroicons:globe-americas',
+    color: '#2DD4BF',
+    struggle: 'Getting outside, activity planning, pet care routines, adventure preparation',
+    builds: [
+      'Dog care & health guides',
+      'Outdoor activity content',
+      'Adventure checklists',
+      'Maine nature photography'
+    ]
+  }
+];
+---
+
+<section id="life-areas" class="py-24 md:py-32 relative">
+  <div class="container mx-auto px-6">
+    <!-- Section header -->
+    <div class="text-center mb-16 section-header">
+      <p class="text-[#F67280] text-sm md:text-base uppercase tracking-widest mb-4">Where It Matters</p>
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        4 Life Areas, <span class="text-gradient">One Mission</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg">
+        Tools for the parts of life that trip up different minds
+      </p>
+    </div>
+
+    <!-- Life Areas Grid - 2x2 on desktop, stacked on mobile -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 life-areas-grid">
+      {lifeAreas.map((area) => (
+        <div class="life-area-card glass-dark rounded-2xl p-6 md:p-8 border border-white/10 relative overflow-hidden group hover:border-white/20 transition-all duration-300">
+          <!-- Accent glow -->
+          <div class="absolute top-0 right-0 w-32 h-32 opacity-20 group-hover:opacity-30 transition-opacity" style={`background: radial-gradient(circle at top right, ${area.color}, transparent 70%);`}></div>
+
+          <div class="relative z-10">
+            <!-- Header -->
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style={`background: ${area.color}20;`}>
+                <Icon name={area.icon} class="w-6 h-6" style={`color: ${area.color};`} />
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-white">{area.name}</h3>
+            </div>
+
+            <!-- The Struggle -->
+            <div class="mb-6">
+              <p class="text-xs font-bold text-white/40 uppercase tracking-wider mb-2">The Struggle</p>
+              <p class="text-white/70 leading-relaxed">{area.struggle}</p>
+            </div>
+
+            <!-- What We Build -->
+            <div>
+              <p class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">What We Build</p>
+              <ul class="space-y-2">
+                {area.builds.map((item) => (
+                  <li class="flex items-start gap-2 text-white/80">
+                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={`background: ${area.color};`}></span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Section header animation
+    gsap.fromTo('.section-header',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#life-areas',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Stagger life area cards
+    gsap.fromTo('.life-area-card',
+      { y: 80, opacity: 0, scale: 0.95 },
+      {
+        scrollTrigger: {
+          trigger: '.life-areas-grid',
+          start: 'top 85%',
+          end: 'top 55%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.1,
+        ease: 'power3.out'
+      }
+    );
+  });
+</script>
+
+<style>
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #F67280 0%, #4B3F72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
