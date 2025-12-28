@@ -19,34 +19,42 @@
         <span class="block text-gradient">Awakened</span>
         <span class="block text-white/90">AI</span>
       </h1>
+
     </div>
 
-    <!-- Horizontal scroll tagline -->
-    <div class="horizontal-scroll-container overflow-hidden py-8 my-12">
-      <div class="horizontal-text flex items-center gap-8 text-2xl md:text-4xl lg:text-5xl font-light text-white/60 whitespace-nowrap">
-        <span class="inline-flex items-center gap-4">
-          <span class="text-[#F67280]">Different minds</span>
-          <svg class="w-8 h-8 text-[#4B3F72]" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"/>
-          </svg>
-        </span>
+    <!-- Horizontal scroll tagline - auto-scrolling marquee -->
+    <div class="horizontal-scroll-container overflow-hidden py-8 my-8">
+      <div class="horizontal-text flex items-center gap-12 text-2xl md:text-4xl lg:text-5xl font-light text-white/60 whitespace-nowrap">
+        <!-- First set -->
+        <span class="text-[#F67280]">Different minds</span>
         <span>deserve</span>
-        <span class="inline-flex items-center gap-4">
-          <span class="text-[#5B9BD5]">different tools</span>
-          <svg class="w-8 h-8 text-[#4B3F72]" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"/>
-          </svg>
-        </span>
+        <span class="text-[#5B9BD5]">different tools</span>
         <span>and</span>
         <span class="text-[#FFDD57]">better stories</span>
-        <span class="mx-8">|</span>
+        <span class="text-white/20">·</span>
         <span class="text-[#F5E9D3]">Fashion</span>
-        <span class="text-white/30">+</span>
+        <span class="text-white/20">·</span>
         <span class="text-[#5B9BD5]">Productivity</span>
-        <span class="text-white/30">+</span>
+        <span class="text-white/20">·</span>
         <span class="text-[#2C786C]">Visual Art</span>
-        <span class="text-white/30">+</span>
+        <span class="text-white/20">·</span>
         <span class="text-[#7B68A3]">Tech</span>
+        <span class="text-white/20 mx-8">—</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="text-[#F67280]">Different minds</span>
+        <span>deserve</span>
+        <span class="text-[#5B9BD5]">different tools</span>
+        <span>and</span>
+        <span class="text-[#FFDD57]">better stories</span>
+        <span class="text-white/20">·</span>
+        <span class="text-[#F5E9D3]">Fashion</span>
+        <span class="text-white/20">·</span>
+        <span class="text-[#5B9BD5]">Productivity</span>
+        <span class="text-white/20">·</span>
+        <span class="text-[#2C786C]">Visual Art</span>
+        <span class="text-white/20">·</span>
+        <span class="text-[#7B68A3]">Tech</span>
+        <span class="text-white/20 mx-8">—</span>
       </div>
     </div>
 
@@ -107,6 +115,18 @@
       { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: 'power3.out' }
     );
 
+    // Founder photo animation
+    gsap.fromTo('.founder-photo-wrapper',
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.8, delay: 0.7, ease: 'back.out(1.7)' }
+    );
+
+    // Founder name animation
+    gsap.fromTo('.founder-name',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, delay: 0.9, ease: 'power3.out' }
+    );
+
     // Stats animation
     gsap.fromTo('.stat-item',
       { y: 50, opacity: 0 },
@@ -135,18 +155,15 @@
       ease: 'power1.inOut'
     });
 
-    // Horizontal text scroll animation - moves based on page scroll
+    // Horizontal text auto-scroll animation - loops continuously
     const horizontalText = document.querySelector('.horizontal-text');
     if (horizontalText) {
+      // Auto-scrolling marquee effect
       gsap.to('.horizontal-text', {
         xPercent: -50,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#hero',
-          start: 'top top',
-          end: '60% top',
-          scrub: 0.5
-        }
+        ease: 'linear',
+        duration: 20,
+        repeat: -1
       });
     }
 

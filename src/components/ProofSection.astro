@@ -1,0 +1,162 @@
+---
+// Proof section - "By The Numbers" metrics for E-E-A-T authority signals
+import { Icon } from 'astro-icon/components';
+
+const metrics = [
+  {
+    value: '31+',
+    label: 'Etsy Sales',
+    sublabel: 'Since March 2024',
+    icon: 'heroicons:shopping-bag',
+    color: '#F67280'
+  },
+  {
+    value: '20',
+    label: 'Newsletter',
+    sublabel: 'Subscribers',
+    icon: 'heroicons:envelope',
+    color: '#4B3F72'
+  },
+  {
+    value: '10',
+    label: 'Brands',
+    sublabel: 'In Ecosystem',
+    icon: 'heroicons:building-storefront',
+    color: '#F67280'
+  },
+  {
+    value: '6',
+    label: 'Applications',
+    sublabel: 'In Production',
+    icon: 'heroicons:cpu-chip',
+    color: '#4B3F72'
+  },
+  {
+    value: '8.7',
+    label: 'Years',
+    sublabel: 'Software Engineering',
+    icon: 'heroicons:code-bracket',
+    color: '#F67280'
+  },
+  {
+    value: '1000+',
+    label: 'Photos',
+    sublabel: 'Visual Archive',
+    icon: 'heroicons:camera',
+    color: '#4B3F72'
+  }
+];
+---
+
+<section id="proof" class="py-16 md:py-20 relative">
+  <!-- Section header -->
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <p class="text-[#F67280] text-sm font-medium uppercase tracking-wider mb-2">Track Record</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-white">By The Numbers</h2>
+    </div>
+
+    <!-- Metrics grid -->
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 proof-metrics">
+        {metrics.map((metric, index) => (
+          <div
+            class="metric-card glass-dark rounded-2xl p-4 md:p-5 border border-white/10 text-center group hover:border-[#F67280]/30 transition-all duration-300"
+            data-index={index}
+          >
+            <!-- Icon -->
+            <div
+              class="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center"
+              style={`background: ${metric.color}20;`}
+            >
+              <Icon name={metric.icon} class="w-5 h-5" style={`color: ${metric.color};`} />
+            </div>
+
+            <!-- Value with counter animation -->
+            <div
+              class="text-2xl md:text-3xl font-bold text-white mb-1 metric-value"
+              data-value={metric.value}
+            >
+              {metric.value}
+            </div>
+
+            <!-- Labels -->
+            <p class="text-white/80 text-sm font-medium">{metric.label}</p>
+            <p class="text-white/40 text-xs">{metric.sublabel}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Staggered fade-in for metric cards
+    gsap.fromTo('.metric-card',
+      { y: 40, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#proof',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.1
+      }
+    );
+
+    // Counter animation for values
+    const metricValues = document.querySelectorAll('.metric-value');
+
+    ScrollTrigger.create({
+      trigger: '#proof',
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        metricValues.forEach((el) => {
+          const target = el.getAttribute('data-value') || '0';
+          const hasPlus = target.includes('+');
+          const hasDecimal = target.includes('.');
+          const numericValue = parseFloat(target.replace('+', ''));
+
+          const obj = { value: 0 };
+          gsap.to(obj, {
+            value: numericValue,
+            duration: 2,
+            ease: 'power2.out',
+            onUpdate: () => {
+              let displayValue;
+              if (hasDecimal) {
+                displayValue = obj.value.toFixed(1);
+              } else {
+                displayValue = Math.floor(obj.value).toString();
+              }
+              el.textContent = displayValue + (hasPlus ? '+' : '');
+            }
+          });
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+
+  .metric-card:hover {
+    transform: translateY(-2px);
+  }
+</style>

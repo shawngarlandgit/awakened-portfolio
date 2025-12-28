@@ -6,16 +6,129 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const siteUrl = 'https://work.awknd.me';
+const description = 'Awakened AI is a 10-brand creative ecosystem built by Shawn Garland for neurodivergent minds. Fashion, productivity tools, content, and applications designed for ADHD and neurodivergent entrepreneurs.';
+
+// Person Schema - Author E-E-A-T signals
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shawn Garland",
+  "jobTitle": "Software Engineer",
+  "description": "Creator of Awakened AI ecosystem - 10 brands for neurodivergent minds. 8.7 years enterprise software experience at Tyler Technologies.",
+  "url": siteUrl,
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "ME",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://github.com/shawngarlandgit",
+    "https://linkedin.com/in/shawngarland",
+    "https://www.etsy.com/shop/AwakeningApparel"
+  ],
+  "knowsAbout": [
+    "Software Engineering",
+    "ADHD Productivity",
+    "Neurodivergent Tools",
+    "Content Automation",
+    "Print on Demand"
+  ]
+};
+
+// Organization Schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Awakened AI",
+  "alternateName": "AWKND",
+  "url": siteUrl,
+  "description": "Multi-brand ecosystem for neurodivergent productivity, fashion, and content creation",
+  "founder": {
+    "@type": "Person",
+    "name": "Shawn Garland"
+  },
+  "foundingLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "ME",
+      "addressCountry": "US"
+    }
+  },
+  "numberOfEmployees": 1,
+  "brand": [
+    { "@type": "Brand", "name": "Awakened Insights" },
+    { "@type": "Brand", "name": "Awakened Systems" },
+    { "@type": "Brand", "name": "Awakening Apparel" },
+    { "@type": "Brand", "name": "Awakened Visuals" },
+    { "@type": "Brand", "name": "Awakened Frameworks" },
+    { "@type": "Brand", "name": "Awakened Outdoors" },
+    { "@type": "Brand", "name": "Awakened Pack" },
+    { "@type": "Brand", "name": "Awakened Audio" },
+    { "@type": "Brand", "name": "Awakened Publishing" },
+    { "@type": "Brand", "name": "Awakened Sleep" }
+  ]
+};
+
+// Product Schema - Focus & Flow
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Focus & Flow: The ADHD Operating System",
+  "description": "15-page printable planner designed specifically for ADHD brains. Features include Energy Signature Mapping, Dopamine Menu, Brain Dump Zones, and Executive Dysfunction SOS protocols.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Awakened Systems"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/PreOrder",
+    "availabilityStarts": "2026-03-01"
+  },
+  "category": "Productivity Planner"
+};
+
+// SoftwareApplication Schema - Production Apps
+const softwareSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Neuro-Pipeline",
+    "description": "AI-powered content automation system that transforms voice notes into multi-platform social media posts for ADHD creators",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "author": { "@type": "Person", "name": "Shawn Garland" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ADHD Content Engine",
+    "description": "Automated content scheduling and publishing system designed for neurodivergent workflows",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "author": { "@type": "Person", "name": "Shawn Garland" }
+  }
+];
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Awakened AI - Multi-brand creative studio for neurodivergent minds. Fashion, productivity tools, content, and applications." />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#4B3F72" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Shawn Garland" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- AI Bot Access -->
+    <meta name="robots" content="index, follow" />
 
     <!-- Atkinson Hyperlegible Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +137,24 @@ const { title } = Astro.props;
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Different minds deserve different tools—and better stories." />
+    <meta property="og:description" content="Different minds deserve different tools—and better stories. 10-brand ecosystem for neurodivergent creators." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://awknd.me/work" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:site_name" content="Awakened AI" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Different minds deserve different tools—and better stories. 10-brand ecosystem for neurodivergent creators." />
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    {softwareSchemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
 
     <title>{title}</title>
   </head>

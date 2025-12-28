@@ -1,0 +1,154 @@
+---
+// Founder section for E-E-A-T authority signals
+import { Icon } from 'astro-icon/components';
+
+const founder = {
+  name: 'Shawn Garland',
+  title: 'Software Engineer & Creator',
+  location: 'Maine, USA',
+  experience: '8+ Years Building Enterprise Systems',
+  background: 'Previously: Tyler Technologies (8.7 years)',
+  mission: 'I build tools and content for neurodivergent minds because one-size-fits-all never actually fit anyone. After years of building enterprise software, I realized the same engineering principles could help ADHD brains like mine work better—not harder.',
+  color: '#F67280'
+};
+
+const credentials = [
+  { label: 'Years Engineering', value: '8.7+', icon: 'heroicons:code-bracket' },
+  { label: 'Brands Created', value: '10', icon: 'heroicons:building-storefront' },
+  { label: 'Based In', value: 'Maine', icon: 'heroicons:map-pin' }
+];
+
+const socials = [
+  { name: 'GitHub', url: 'https://github.com/shawngarlandgit', icon: 'github' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/shawngarland', icon: 'linkedin' },
+  { name: 'Etsy', url: 'https://www.etsy.com/shop/AwakeningApparel', icon: 'etsy' }
+];
+
+const socialIcons: Record<string, string> = {
+  github: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`,
+  linkedin: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+  etsy: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M8.559 2.647c0-.265.04-.529.04-.794H2.492c-.253 0-.433.063-.543.19-.11.126-.166.3-.166.524v1.317c0 .224.056.398.166.524.11.127.29.19.543.19h.947c.265 0 .463.064.596.19.132.127.199.319.199.576v13.272c0 .256-.067.448-.199.576-.133.126-.331.19-.596.19h-.947c-.253 0-.433.063-.543.19-.11.126-.166.3-.166.524v1.317c0 .224.056.398.166.524.11.127.29.19.543.19h6.107c0-.265-.04-.529-.04-.794 0-2.117.768-3.836 2.304-5.157 1.536-1.322 3.456-1.982 5.76-1.982 1.152 0 2.19.144 3.115.431.925.288 1.708.688 2.35 1.2.64.513 1.135 1.114 1.483 1.803.348.69.522 1.438.522 2.244 0 .863-.19 1.64-.57 2.33-.38.69-.912 1.28-1.593 1.77-.681.49-1.487.866-2.416 1.13-.93.264-1.943.397-3.04.397H8.559zm5.76-2.647c1.536 0 2.899.238 4.09.714 1.19.477 2.19 1.114 3 1.912.81.799 1.424 1.728 1.843 2.786.42 1.058.629 2.175.629 3.35 0 1.177-.21 2.294-.629 3.352-.419 1.058-1.033 1.987-1.843 2.786-.81.798-1.81 1.435-3 1.912-1.191.476-2.554.714-4.09.714H2.492c-.253 0-.433-.063-.543-.19-.11-.126-.166-.3-.166-.524V3.117c0-.224.056-.398.166-.524.11-.127.29-.19.543-.19h11.827z"/></svg>`
+};
+---
+
+<section id="founder" class="py-20 md:py-28 relative">
+  <!-- Subtle gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#F6728008] to-transparent pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-4xl mx-auto founder-content">
+      <!-- Main card -->
+      <div class="glass-dark rounded-3xl p-8 md:p-12 border border-white/10 relative overflow-hidden">
+        <!-- Decorative accent -->
+        <div class="absolute top-0 right-0 w-64 h-64 opacity-10" style={`background: radial-gradient(circle at top right, ${founder.color}, transparent 70%);`}></div>
+
+        <div class="relative z-10">
+          <!-- Header row -->
+          <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 mb-8">
+            <!-- Profile photo with teal gradient ring - exact match to awakenedai.online (280px) -->
+            <div class="founder-photo-container rounded-full p-[4px] bg-gradient-to-br from-[#2DD4BF] via-[#14B8A6] to-[#0D9488] flex-shrink-0 mx-auto md:mx-0 shadow-lg shadow-black/30" style="width: 180px; height: 180px;">
+              <div class="w-full h-full rounded-full overflow-hidden bg-[#1a1a2e]">
+                <img
+                  src="/images/founder-photo.png"
+                  alt="Shawn Garland - Founder of Awakened AI"
+                  style="width: 220%; height: 220%; object-fit: cover; object-position: 30% 10%; transform: translate(-28%, 0%);"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="text-center md:text-left flex-grow">
+              <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">{founder.name}</h2>
+              <p class="text-[#F67280] text-lg font-medium mb-1">{founder.title}</p>
+              <p class="text-white/60 mb-4">{founder.experience}</p>
+
+              <!-- Credential badges -->
+              <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                {credentials.map((cred) => (
+                  <div class="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+                    <Icon name={cred.icon} class="w-4 h-4 text-[#F67280]" />
+                    <span class="text-white/80 text-sm">{cred.value}</span>
+                    <span class="text-white/40 text-sm">{cred.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Mission statement -->
+          <div class="mb-8">
+            <p class="text-white/70 text-lg leading-relaxed">
+              {founder.mission}
+            </p>
+          </div>
+
+          <!-- Background & Social -->
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-white/10">
+            <p class="text-white/50 text-sm">
+              <Icon name="heroicons:building-office-2" class="w-4 h-4 inline mr-1" />
+              {founder.background}
+            </p>
+
+            <!-- Social links -->
+            <div class="flex items-center gap-3">
+              {socials.map((social) => (
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#F67280]/50 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300"
+                  aria-label={social.name}
+                >
+                  <Fragment set:html={socialIcons[social.icon]} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Founder section fade in
+    gsap.fromTo('.founder-content',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#founder',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+  });
+</script>
+
+<style>
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Exact photo cropping to match awakenedai.online */
+  .founder-photo {
+    width: 180%;
+    height: 180%;
+    object-fit: cover;
+    object-position: 25% 15%;
+    transform: translate(-22%, -5%);
+  }
+</style>

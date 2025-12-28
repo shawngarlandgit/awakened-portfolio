@@ -1,0 +1,350 @@
+---
+// Product Showcase section for upcoming products
+import { Icon } from 'astro-icon/components';
+
+interface Feature {
+  name: string;
+  description: string;
+  icon: string;
+}
+
+const product = {
+  name: 'Focus & Flow',
+  subtitle: 'The ADHD Operating System',
+  description: 'A 15-page printable planner designed specifically for neurodivergent minds. Built around how ADHD brains actually work, not how neurotypical productivity gurus think they should.',
+  brand: 'Awakened Systems',
+  status: 'Available Spring 2026',
+  launchDate: 'Spring 2026',
+  color: '#F67280'
+};
+
+const features: Feature[] = [
+  {
+    name: 'No-Guilt Guide',
+    description: 'Start fresh without shame. Every day is a new opportunity.',
+    icon: 'heroicons:heart'
+  },
+  {
+    name: 'Energy Signature Mapping',
+    description: 'Track your natural energy patterns to work with your brain, not against it.',
+    icon: 'heroicons:bolt'
+  },
+  {
+    name: 'Dopamine Menu',
+    description: 'Pre-planned rewards and motivators when you need that extra push.',
+    icon: 'heroicons:sparkles'
+  },
+  {
+    name: 'Brain Dump Zones',
+    description: 'Capture thoughts instantly before they disappear into the void.',
+    icon: 'heroicons:cloud'
+  },
+  {
+    name: 'Low/High Battery Modes',
+    description: 'Different task lists for different energy levels. No more forcing it.',
+    icon: 'heroicons:battery-50'
+  },
+  {
+    name: 'Hyperfocus Protection',
+    description: 'Reminders and checkpoints to eat, hydrate, and take breaks.',
+    icon: 'heroicons:shield-check'
+  },
+  {
+    name: 'Zone Cleaning System',
+    description: 'Break overwhelming tasks into tiny, dopamine-friendly chunks.',
+    icon: 'heroicons:home-modern'
+  },
+  {
+    name: 'Executive Dysfunction SOS',
+    description: 'Emergency protocols for when your brain just will not cooperate.',
+    icon: 'heroicons:lifebuoy'
+  }
+];
+---
+
+<section id="products" class="py-24 md:py-32 relative overflow-hidden">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#F6728010] to-transparent pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Section header -->
+    <div class="text-center mb-16 product-header">
+      <p class="text-[#F67280] text-sm md:text-base uppercase tracking-widest mb-4">Available Spring 2026</p>
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        <span class="text-gradient">Focus & Flow</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg">
+        The ADHD Operating System — A 15-page printable planner that actually gets how your brain works.
+      </p>
+    </div>
+
+    <!-- Product showcase card -->
+    <div class="max-w-6xl mx-auto product-showcase">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Product mockup / visual side -->
+        <div class="product-visual relative">
+          <div class="glass-dark rounded-3xl p-8 md:p-12 border border-white/10 relative overflow-hidden">
+            <!-- Decorative gradient -->
+            <div class="absolute inset-0 opacity-20" style="background: radial-gradient(circle at top left, #F67280, transparent 60%);"></div>
+
+            <!-- Product preview -->
+            <div class="relative z-10 text-center">
+              <!-- Planner mockup illustration -->
+              <div class="w-48 h-64 md:w-64 md:h-80 mx-auto mb-8 relative">
+                <!-- Notebook/planner visual -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#F67280] to-[#4B3F72] rounded-lg shadow-2xl transform -rotate-3 opacity-40"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-white/90 to-white/80 rounded-lg shadow-2xl flex flex-col items-center justify-center p-6">
+                  <div class="text-[#F67280] mb-2">
+                    <Icon name="heroicons:bolt" class="w-12 h-12 md:w-16 md:h-16" />
+                  </div>
+                  <p class="text-[#4B3F72] font-bold text-lg md:text-xl text-center leading-tight">Focus<br/>&<br/>Flow</p>
+                  <p class="text-[#4B3F72]/60 text-xs md:text-sm mt-2">ADHD Operating System</p>
+                  <div class="mt-4 flex gap-1">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#F67280]"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#FFDD57]"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#2C786C]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product stats -->
+              <div class="flex justify-center gap-6 text-center">
+                <div>
+                  <p class="text-3xl md:text-4xl font-bold text-white">15</p>
+                  <p class="text-white/50 text-sm">Pages</p>
+                </div>
+                <div class="w-px bg-white/20"></div>
+                <div>
+                  <p class="text-3xl md:text-4xl font-bold text-white">8</p>
+                  <p class="text-white/50 text-sm">Tools</p>
+                </div>
+                <div class="w-px bg-white/20"></div>
+                <div>
+                  <p class="text-3xl md:text-4xl font-bold text-[#F67280]">PDF</p>
+                  <p class="text-white/50 text-sm">Printable</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand badge -->
+          <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-[#0d0d15] border border-white/10 rounded-full flex items-center gap-2">
+            <Icon name="heroicons:cog-6-tooth" class="w-4 h-4 text-[#F67280]" />
+            <span class="text-white/60 text-sm">By {product.brand}</span>
+          </div>
+        </div>
+
+        <!-- Features grid -->
+        <div class="product-features">
+          <div class="mb-6">
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
+              Built for ADHD Brains
+            </h3>
+            <p class="text-white/50">
+              Every page designed around neurodivergent needs — not neurotypical expectations.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {features.map((feature, index) => (
+              <div
+                class="feature-card glass-dark rounded-xl p-4 border border-white/5 hover:border-[#F67280]/30 transition-all duration-300 group"
+                data-index={index}
+              >
+                <div class="flex items-start gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-[#F67280]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#F67280]/20 transition-colors">
+                    <Icon name={feature.icon} class="w-5 h-5 text-[#F67280]" />
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-sm mb-1">{feature.name}</h4>
+                    <p class="text-white/40 text-xs leading-relaxed">{feature.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA with Email Notify -->
+          <div class="mt-8">
+            <div class="notify-form-wrapper glass-dark rounded-xl p-4 border border-white/10 mb-4">
+              <p class="text-white/70 text-sm mb-3">Get notified when Focus & Flow launches:</p>
+              <form class="flex flex-col sm:flex-row gap-3" id="notify-form">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  class="flex-grow px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#F67280]/50 transition-colors"
+                  required
+                />
+                <button type="submit" class="px-6 py-3 bg-[#F67280] hover:bg-[#F67280]/80 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 notify-btn whitespace-nowrap">
+                  <Icon name="heroicons:bell" class="w-5 h-5" />
+                  Notify Me
+                </button>
+              </form>
+              <p class="text-white/30 text-xs mt-2">Join 20 others waiting for launch. No spam, ever.</p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="#faq" class="px-6 py-3 bg-white/5 hover:bg-white/10 text-white/80 font-semibold rounded-xl border border-white/10 transition-colors flex items-center gap-2">
+                <Icon name="heroicons:question-mark-circle" class="w-5 h-5" />
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial-style quote -->
+    <div class="mt-16 max-w-3xl mx-auto text-center product-quote">
+      <div class="glass-dark rounded-2xl p-8 border border-white/5">
+        <Icon name="heroicons:chat-bubble-bottom-center-text" class="w-8 h-8 text-[#F67280]/40 mx-auto mb-4" />
+        <p class="text-xl md:text-2xl text-white/80 italic leading-relaxed mb-4">
+          "Traditional planners made me feel broken. This one finally speaks my brain's language."
+        </p>
+        <p class="text-white/40 text-sm">— The philosophy behind Focus & Flow</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Header animation
+    gsap.fromTo('.product-header',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#products',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Product visual slide in from left
+    gsap.fromTo('.product-visual',
+      { x: -60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.product-showcase',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        x: 0,
+        opacity: 1
+      }
+    );
+
+    // Product features slide in from right
+    gsap.fromTo('.product-features',
+      { x: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.product-showcase',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        x: 0,
+        opacity: 1
+      }
+    );
+
+    // Feature cards stagger
+    gsap.fromTo('.feature-card',
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.product-features',
+          start: 'top 70%',
+          end: 'top 40%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.05
+      }
+    );
+
+    // Quote fade in
+    gsap.fromTo('.product-quote',
+      { y: 40, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.product-quote',
+          start: 'top 90%',
+          end: 'top 70%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Notify form interaction
+    const notifyForm = document.getElementById('notify-form');
+    if (notifyForm) {
+      notifyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = (notifyForm.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+        if (email) {
+          // Store in localStorage for now - can be replaced with API call
+          const existingEmails = JSON.parse(localStorage.getItem('focusflow-notify') || '[]');
+          if (!existingEmails.includes(email)) {
+            existingEmails.push(email);
+            localStorage.setItem('focusflow-notify', JSON.stringify(existingEmails));
+          }
+          alert(`Thanks! We'll notify ${email} when Focus & Flow launches in Spring 2026.`);
+          (notifyForm.querySelector('input[type="email"]') as HTMLInputElement).value = '';
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(135deg, #F67280 0%, #4B3F72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+
+  .feature-card {
+    transform-origin: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Planner floating animation */
+  .product-visual .w-48 {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(-3deg); }
+  }
+
+  .notify-form-wrapper:focus-within {
+    border-color: rgba(246, 114, 128, 0.3);
+  }
+</style>

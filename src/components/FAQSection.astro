@@ -1,0 +1,161 @@
+---
+// FAQ Section with structured data for AEO/GEO optimization
+import { Icon } from 'astro-icon/components';
+
+const faqs = [
+  {
+    question: "What makes Awakened AI brands neurodivergent-focused?",
+    answer: "Every Awakened AI brand is designed around how ADHD and neurodivergent brains actually work—not how productivity culture thinks they should work. Our tools embrace hyperfocus cycles, energy fluctuations, and executive function challenges instead of fighting against them. We build for real patterns, not neurotypical ideals."
+  },
+  {
+    question: "Who is behind Awakened AI?",
+    answer: "Shawn Garland, a software engineer with 8.7 years of enterprise experience at Tyler Technologies, based in Maine. As someone with ADHD, Shawn builds the tools and content he wished existed—systems that work with neurodivergent brains rather than demanding they adapt to neurotypical expectations."
+  },
+  {
+    question: "What is Focus & Flow: The ADHD Operating System?",
+    answer: "Focus & Flow is a 15-page printable planner designed specifically for ADHD brains. It includes Energy Signature Mapping, a Dopamine Menu, Brain Dump Zones, Low/High Battery Modes, and Executive Dysfunction SOS protocols. Launching Spring 2026 from Awakened Systems."
+  },
+  {
+    question: "How do I choose between Awakened Insights and Awakened Systems?",
+    answer: "Awakened Insights provides educational content—articles, guides, and strategies for neurodivergent productivity and entrepreneurship. Awakened Systems offers actionable tools like planners, templates, and frameworks you can implement immediately. Start with Insights to learn, then use Systems to execute."
+  },
+  {
+    question: "Can I work with Awakened AI for consulting?",
+    answer: "Currently, Awakened AI focuses on products and content rather than direct consulting. However, the Neuro-Pipeline content automation system and productivity frameworks are available for creators. Subscribe to the newsletter for updates on future consulting offerings and tool releases."
+  },
+  {
+    question: "What tech stack powers the Neuro-Pipeline?",
+    answer: "Neuro-Pipeline is built with Node.js, Bun runtime, and Supabase for the backend. It uses OpenAI and Claude for content generation, n8n for workflow automation, and integrates with social platforms via their APIs. The dashboard runs on Next.js with real-time updates."
+  }
+];
+
+// Generate FAQ Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<section id="faq" class="py-20 md:py-28 relative">
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Section header -->
+      <div class="text-center mb-12">
+        <p class="text-[#F67280] text-sm font-medium uppercase tracking-wider mb-2">Common Questions</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+        <p class="text-white/60 max-w-2xl mx-auto">
+          Everything you need to know about the Awakened AI ecosystem and how it helps neurodivergent creators.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <div class="space-y-4 faq-list">
+        {faqs.map((faq, index) => (
+          <div class="faq-item glass-dark rounded-2xl border border-white/10 overflow-hidden" data-index={index}>
+            <button
+              class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-white/5 transition-colors"
+              aria-expanded="false"
+            >
+              <span class="text-white font-medium text-lg pr-4">{faq.question}</span>
+              <Icon name="heroicons:chevron-down" class="w-5 h-5 text-[#F67280] flex-shrink-0 faq-icon transition-transform duration-300" />
+            </button>
+            <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+              <p class="text-white/70 leading-relaxed pb-5">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector('.faq-trigger');
+      const content = item.querySelector('.faq-content') as HTMLElement;
+      const icon = item.querySelector('.faq-icon');
+
+      trigger?.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close all other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherTrigger = otherItem.querySelector('.faq-trigger');
+            const otherContent = otherItem.querySelector('.faq-content') as HTMLElement;
+            const otherIcon = otherItem.querySelector('.faq-icon');
+
+            otherTrigger?.setAttribute('aria-expanded', 'false');
+            if (otherContent) otherContent.style.maxHeight = '0';
+            otherIcon?.classList.remove('rotate-180');
+          }
+        });
+
+        // Toggle current item
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+
+        if (!isOpen) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon?.classList.add('rotate-180');
+        } else {
+          content.style.maxHeight = '0';
+          icon?.classList.remove('rotate-180');
+        }
+      });
+    });
+
+    // GSAP animation
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (gsap && ScrollTrigger) {
+      gsap.fromTo('.faq-item',
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '#faq',
+            start: 'top 80%',
+            end: 'top 50%',
+            scrub: 1
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.1
+        }
+      );
+    }
+  });
+</script>
+
+<style>
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+
+  .faq-trigger:hover .faq-icon {
+    color: white;
+  }
+
+  .faq-item:has([aria-expanded="true"]) {
+    border-color: rgba(246, 114, 128, 0.3);
+  }
+</style>

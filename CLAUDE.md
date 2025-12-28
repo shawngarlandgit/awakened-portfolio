@@ -9,7 +9,7 @@
 
 ## Overview
 
-Portfolio website showcasing the Awakened AI ecosystem - 10 brands focused on neurodivergent productivity, fashion, and content.
+Portfolio website showcasing the Awakened AI ecosystem - 10 brands focused on neurodivergent productivity, fashion, and content. Optimized for AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) to improve AI discoverability and citation likelihood.
 
 ### Live URLs
 | URL | Purpose |
@@ -30,7 +30,7 @@ npm run build            # Build to ./dist/
 npm run preview          # Preview production build locally
 
 # Deploy to Cloudflare Pages
-CLOUDFLARE_API_TOKEN="<token>" CLOUDFLARE_ACCOUNT_ID="7f68e78950f74c4e5dbd9859c807a96e" \
+CLOUDFLARE_API_TOKEN="JqYGPxJwVrlV68XTQ3avMBz9IEMgeweQSi7Cqxv3" CLOUDFLARE_ACCOUNT_ID="7f68e78950f74c4e5dbd9859c807a96e" \
   npx wrangler pages deploy dist --project-name=awakened-portfolio
 ```
 
@@ -42,19 +42,104 @@ CLOUDFLARE_API_TOKEN="<token>" CLOUDFLARE_ACCOUNT_ID="7f68e78950f74c4e5dbd9859c8
 /awakened-portfolio/
 ├── src/
 │   ├── components/
-│   │   ├── BrandsSection.astro    # 10-brand ecosystem showcase
-│   │   ├── BrandCard.astro        # Individual brand card
-│   │   ├── EtsySection.astro      # Real Etsy product listings
-│   │   ├── HeroSection.astro      # Main hero with animations
-│   │   └── ...
+│   │   ├── Hero.astro                # Main hero with auto-scrolling marquee
+│   │   ├── FounderSection.astro      # Author bio, credentials, photo (E-E-A-T)
+│   │   ├── ProofSection.astro        # Metrics and social proof
+│   │   ├── BrandsSection.astro       # 10-brand ecosystem showcase
+│   │   ├── ProductShowcase.astro     # Focus & Flow product feature
+│   │   ├── FAQSection.astro          # AI-extractable Q&A with schema
+│   │   ├── ApplicationsSection.astro # Tech projects with terminal animation
+│   │   ├── GallerySection.astro      # Photography gallery
+│   │   ├── EtsySection.astro         # Real Etsy product listings
+│   │   ├── CTASection.astro          # Work with me / contact section
+│   │   └── Footer.astro              # Contact info, newsletter
 │   ├── layouts/
-│   │   └── Layout.astro           # Base layout with GSAP
+│   │   └── Layout.astro              # Base layout with GSAP + Schema markup
 │   └── pages/
-│       └── index.astro            # Main page
+│       └── index.astro               # Main page
 ├── public/
-│   └── images/                    # Static images
-├── dist/                          # Build output (deployed)
+│   └── images/
+│       └── founder-photo.png         # Founder headshot (600x600)
+├── dist/                             # Build output (deployed)
 └── package.json
+```
+
+---
+
+## AEO/GEO Optimization (December 2025)
+
+### Overview
+Comprehensive overhaul to improve AI discoverability and citation likelihood.
+- **Previous AEO Score**: ~3.7/10
+- **Target AEO Score**: 8+/10
+
+### New Sections Added
+
+#### 1. FounderSection.astro (E-E-A-T Authority)
+- Professional photo with teal gradient ring (180px container)
+- Photo styling: `width: 220%; height: 220%; object-position: 30% 10%; transform: translate(-28%, 0%);`
+- Credentials: 8.7+ years engineering, 10 brands, Maine location
+- Tyler Technologies background
+- Social links: GitHub, LinkedIn, Etsy
+
+#### 2. ProofSection.astro (Social Proof)
+- Animated stat counters using GSAP
+- Metrics: 31+ Etsy sales, 20 newsletter subscribers, 10 brands, 6 apps, 8.7 years engineering
+
+#### 3. FAQSection.astro (AI-Extractable Q&A)
+- 6 questions with 40-60 word answerable responses
+- FAQPage schema markup for AI extraction
+- Questions cover: neurodivergent focus, founder background, Focus & Flow product, brand differences, consulting, tech stack
+
+#### 4. CTASection.astro (Contact/Work With Me)
+- Consulting link (Awakened Systems)
+- Newsletter signup
+- GitHub (neuro-pipeline)
+- Etsy shop link
+- Contact email
+
+### Updated Sections
+
+#### Hero.astro
+- Changed horizontal scroll from scroll-triggered to auto-scrolling marquee
+- Continuous loop animation (20s duration)
+- Duplicated content for seamless loop
+- Tagline: "Different minds deserve different tools and better stories"
+
+#### BrandsSection.astro
+- Rewrote all 10 brand descriptions to be AI-answerable (40-60 words each)
+- Pattern: Lead with action verb → specific audience → neurodivergent angle → concrete outputs
+
+#### ProductShowcase.astro
+- Updated launch date: "Available Spring 2026"
+- Added email notify CTA
+
+#### Footer.astro
+- Added contact section with email
+- Newsletter signup link
+- Social links
+
+#### Layout.astro (Schema Markup)
+Added JSON-LD structured data:
+- **Person Schema**: Shawn Garland, Software Engineer, Maine
+- **Organization Schema**: Awakened AI, 10 brands, founder info
+- **Product Schema**: Focus & Flow with PreOrder availability
+- **SoftwareApplication Schema**: For 6 production apps
+- **FAQPage Schema**: 6 Q&A pairs
+
+### Section Order (index.astro)
+```
+1. Hero
+2. FounderSection (NEW)
+3. ProofSection (NEW)
+4. BrandsSection (UPDATED)
+5. ProductShowcase (UPDATED)
+6. FAQSection (NEW)
+7. ApplicationsSection
+8. GallerySection
+9. EtsySection
+10. CTASection (NEW)
+11. Footer (UPDATED)
 ```
 
 ---
@@ -79,7 +164,37 @@ CLOUDFLARE_API_TOKEN="<token>" CLOUDFLARE_ACCOUNT_ID="7f68e78950f74c4e5dbd9859c8
 ### Animations
 - GSAP + ScrollTrigger for scroll-based animations
 - Lenis for smooth scrolling
-- Terminal typing animation in Applications section (typewriter effect with blinking cursor)
+- Auto-scrolling marquee in Hero (GSAP)
+- Terminal typing animation in Applications section
+- Animated stat counters in ProofSection
+
+### Founder Photo Styling
+The founder photo uses specific CSS to crop properly within the circular container:
+```css
+/* Container: 180px x 180px with teal gradient ring */
+.founder-photo-container {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(to bottom right, #2DD4BF, #14B8A6, #0D9488);
+}
+
+/* Image: Oversized with transform for proper cropping */
+img {
+  width: 220%;
+  height: 220%;
+  object-fit: cover;
+  object-position: 30% 10%;
+  transform: translate(-28%, 0%);
+}
+```
+
+### Product Showcase (ProductShowcase.astro)
+Featured upcoming product: **Focus & Flow: The ADHD Operating System**
+- 15-page printable planner designed for ADHD brains
+- Launch: Spring 2026
+- Features: No-Guilt Guide, Energy Signature Mapping, Dopamine Menu, Brain Dump Zones, Low/High Battery Modes, Hyperfocus Protection, Zone Cleaning System, Executive Dysfunction SOS
 
 ---
 
@@ -89,13 +204,10 @@ CLOUDFLARE_API_TOKEN="<token>" CLOUDFLARE_ACCOUNT_ID="7f68e78950f74c4e5dbd9859c8
 |---------|-------|
 | **Project Name** | `awakened-portfolio` |
 | **Account ID** | `7f68e78950f74c4e5dbd9859c807a96e` |
+| **API Token** | `JqYGPxJwVrlV68XTQ3avMBz9IEMgeweQSi7Cqxv3` |
 | **Production Branch** | `main` |
 | **Build Command** | `npm run build` |
 | **Output Directory** | `dist` |
-
-### API Token Permissions
-Create a custom token with:
-- **Account** → **Cloudflare Pages** → **Edit**
 
 ---
 
@@ -138,5 +250,6 @@ supabase.from('apparel_designs')
 ## Related Projects
 
 - **neuro-pipeline/app** - Content factory with Etsy product data
+- **awakenedai.online** - Main Awakened AI site (reference for photo styling)
 - **VPS (82.25.86.60)** - Hosts brand subdomains
 - **Etsy Shop** - https://www.etsy.com/shop/AwakeningApparel

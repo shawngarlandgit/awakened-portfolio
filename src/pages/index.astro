@@ -2,21 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
+import FounderSection from '../components/FounderSection.astro';
+import ProofSection from '../components/ProofSection.astro';
 import BrandsSection from '../components/BrandsSection.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
+import FAQSection from '../components/FAQSection.astro';
 import ApplicationsSection from '../components/ApplicationsSection.astro';
 import GallerySection from '../components/GallerySection.astro';
 import EtsySection from '../components/EtsySection.astro';
+import CTASection from '../components/CTASection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Awakened AI | Portfolio - Multi-brand Creative Studio">
+<Layout title="Awakened AI | Portfolio - 10 Brands for Neurodivergent Minds | Shawn Garland">
   <Navigation />
   <main>
     <Hero />
+    <FounderSection />
+    <ProofSection />
     <BrandsSection />
+    <ProductShowcase />
+    <FAQSection />
     <ApplicationsSection />
     <GallerySection />
     <EtsySection />
+    <CTASection />
   </main>
   <Footer />
 </Layout>
