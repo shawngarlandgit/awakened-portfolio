@@ -9,13 +9,13 @@
 
 ## Overview
 
-Portfolio website showcasing the Awakened AI ecosystem - 10 brands focused on neurodivergent productivity, fashion, and content. Optimized for AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) to improve AI discoverability and citation likelihood.
+Portfolio website showcasing the Awakened AI ecosystem - tools for neurodivergent minds organized into 4 Life Areas. Optimized for AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) to improve AI discoverability and citation likelihood.
 
 ### Live URLs
 | URL | Purpose |
 |-----|---------|
 | https://awakened-portfolio.pages.dev | Primary Cloudflare Pages URL |
-| https://work.awknd.me | Custom domain (to be configured) |
+| https://work.awknd.me | Custom domain |
 
 ---
 
@@ -45,7 +45,7 @@ CLOUDFLARE_API_TOKEN="JqYGPxJwVrlV68XTQ3avMBz9IEMgeweQSi7Cqxv3" CLOUDFLARE_ACCOU
 │   │   ├── Hero.astro                # Main hero with auto-scrolling marquee
 │   │   ├── FounderSection.astro      # Author bio, credentials, photo (E-E-A-T)
 │   │   ├── ProofSection.astro        # Metrics and social proof
-│   │   ├── BrandsSection.astro       # 10-brand ecosystem showcase
+│   │   ├── LifeAreasSection.astro    # 4 Life Areas (replaced BrandsSection)
 │   │   ├── ProductShowcase.astro     # Focus & Flow product feature
 │   │   ├── FAQSection.astro          # AI-extractable Q&A with schema
 │   │   ├── ApplicationsSection.astro # Tech projects with terminal animation
@@ -66,6 +66,47 @@ CLOUDFLARE_API_TOKEN="JqYGPxJwVrlV68XTQ3avMBz9IEMgeweQSi7Cqxv3" CLOUDFLARE_ACCOU
 
 ---
 
+## 4 Life Areas (December 2025 Refactor)
+
+Shifted from commercial "10 brands" framing to user-centric life areas where ADHD minds need better tools.
+
+### LifeAreasSection.astro
+
+| Life Area | Combines | Solves |
+|-----------|----------|--------|
+| **Focus & Rest** | Focus & Productivity + Rest & Recovery | Executive function, sleep, procrastination, burnout |
+| **Self & Create** | Self-Expression + Creative Work | Identity, masking, sensory, creative expression |
+| **Build & Ship** | Building & Shipping | Dev productivity, shipping side projects |
+| **Move & Explore** | Adventure & Movement | Getting outside, activity planning, pet care |
+
+### What Each Area Builds
+
+**Focus & Rest:**
+- Focus & Flow planner (Spring 2026)
+- Sleep audio & wind-down content
+- Weekly productivity guides
+- Notion templates with accountability
+
+**Self & Create:**
+- ADHD-positive apparel (31+ Etsy sales)
+- Neurodivergent journals & stickers
+- Photography & visual templates
+- Audio production guides
+
+**Build & Ship:**
+- n8n automation workflows
+- GitHub code templates
+- Neuro-pipeline content factory
+- Shipping frameworks & checklists
+
+**Move & Explore:**
+- Dog care & health guides
+- Outdoor activity content
+- Adventure checklists
+- Maine nature photography
+
+---
+
 ## AEO/GEO Optimization (December 2025)
 
 ### Overview
@@ -76,15 +117,15 @@ Comprehensive overhaul to improve AI discoverability and citation likelihood.
 ### New Sections Added
 
 #### 1. FounderSection.astro (E-E-A-T Authority)
-- Professional photo with teal gradient ring (180px container)
-- Photo styling: `width: 220%; height: 220%; object-position: 30% 10%; transform: translate(-28%, 0%);`
-- Credentials: 8.7+ years engineering, 10 brands, Maine location
+- Professional photo with teal border (220px container)
+- Photo styling: `width: 180%; height: 180%; object-fit: cover; object-position: 50% 0%; transform: translate(0%, -5%);`
+- Credentials: 8.7+ years engineering, Maine location
 - Tyler Technologies background
 - Social links: GitHub, LinkedIn, Etsy
 
 #### 2. ProofSection.astro (Social Proof)
 - Animated stat counters using GSAP
-- Metrics: 31+ Etsy sales, 20 newsletter subscribers, 10 brands, 6 apps, 8.7 years engineering
+- Metrics: 31+ Etsy sales, 20 newsletter subscribers, 4 life areas, 6 apps, 8.7 years engineering
 
 #### 3. FAQSection.astro (AI-Extractable Q&A)
 - 6 questions with 40-60 word answerable responses
@@ -101,28 +142,18 @@ Comprehensive overhaul to improve AI discoverability and citation likelihood.
 ### Updated Sections
 
 #### Hero.astro
-- Changed horizontal scroll from scroll-triggered to auto-scrolling marquee
-- Continuous loop animation (20s duration)
-- Duplicated content for seamless loop
-- Tagline: "Different minds deserve different tools and better stories"
-
-#### BrandsSection.astro
-- Rewrote all 10 brand descriptions to be AI-answerable (40-60 words each)
-- Pattern: Lead with action verb → specific audience → neurodivergent angle → concrete outputs
+- Tagline: "Tools for Neurodivergent Minds"
+- Stats: 4 Life Areas, 6 Applications, 1 Mission
+- Auto-scrolling marquee (20s duration)
 
 #### ProductShowcase.astro
 - Updated launch date: "Available Spring 2026"
 - Added email notify CTA
 
-#### Footer.astro
-- Added contact section with email
-- Newsletter signup link
-- Social links
-
 #### Layout.astro (Schema Markup)
 Added JSON-LD structured data:
 - **Person Schema**: Shawn Garland, Software Engineer, Maine
-- **Organization Schema**: Awakened AI, 10 brands, founder info
+- **Organization Schema**: Awakened AI, founder info
 - **Product Schema**: Focus & Flow with PreOrder availability
 - **SoftwareApplication Schema**: For 6 production apps
 - **FAQPage Schema**: 6 Q&A pairs
@@ -130,26 +161,21 @@ Added JSON-LD structured data:
 ### Section Order (index.astro)
 ```
 1. Hero
-2. FounderSection (NEW)
-3. ProofSection (NEW)
-4. BrandsSection (UPDATED)
-5. ProductShowcase (UPDATED)
-6. FAQSection (NEW)
+2. FounderSection
+3. ProofSection
+4. LifeAreasSection
+5. ProductShowcase
+6. FAQSection
 7. ApplicationsSection
 8. GallerySection
 9. EtsySection
-10. CTASection (NEW)
-11. Footer (UPDATED)
+10. CTASection
+11. Footer
 ```
 
 ---
 
 ## Key Features
-
-### Brand Ecosystem (BrandsSection.astro)
-- **Tier 1**: Awakened Insights, Awakened Systems, Awakening Apparel
-- **Tier 2**: Awakened Visuals, Awakened Frameworks, Awakened Outdoors, Awakened Pack, Awakened Audio
-- **Tier 3**: Awakened Publishing, Awakened Sleep
 
 ### Etsy Integration (EtsySection.astro)
 - Real products pulled from Supabase `apparel_designs` table
@@ -171,22 +197,24 @@ Added JSON-LD structured data:
 ### Founder Photo Styling
 The founder photo uses specific CSS to crop properly within the circular container:
 ```css
-/* Container: 180px x 180px with teal gradient ring */
-.founder-photo-container {
-  width: 180px;
-  height: 180px;
+/* Container: 220px x 220px with teal border */
+.founder-photo-wrapper {
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  padding: 4px;
-  background: linear-gradient(to bottom right, #2DD4BF, #14B8A6, #0D9488);
+  overflow: hidden;
+  border: 4px solid #2DD4BF;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  background: #16131F;
 }
 
-/* Image: Oversized with transform for proper cropping */
+/* Image: Exact match to awakenedai.online */
 img {
-  width: 220%;
-  height: 220%;
+  width: 180%;
+  height: 180%;
   object-fit: cover;
-  object-position: 30% 10%;
-  transform: translate(-28%, 0%);
+  object-position: 50% 0%;
+  transform: translate(0%, -5%);
 }
 ```
 
