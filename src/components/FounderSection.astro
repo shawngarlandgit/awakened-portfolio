@@ -45,16 +45,14 @@ const socialIcons: Record<string, string> = {
         <div class="relative z-10">
           <!-- Header row -->
           <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 mb-8">
-            <!-- Profile photo with teal gradient ring - exact match to awakenedai.online (280px) -->
-            <div class="founder-photo-container rounded-full p-[4px] bg-gradient-to-br from-[#2DD4BF] via-[#14B8A6] to-[#0D9488] flex-shrink-0 mx-auto md:mx-0 shadow-lg shadow-black/30" style="width: 180px; height: 180px;">
-              <div class="w-full h-full rounded-full overflow-hidden bg-[#1a1a2e]">
-                <img
-                  src="/images/founder-photo.png"
-                  alt="Shawn Garland - Founder of Awakened AI"
-                  style="width: 220%; height: 220%; object-fit: cover; object-position: 30% 10%; transform: translate(-28%, 0%);"
-                  loading="lazy"
-                />
-              </div>
+            <!-- Profile photo - exact match to awakenedai.online -->
+            <div class="founder-photo-wrapper flex-shrink-0 mx-auto md:mx-0" style="width: 220px; height: 220px; border-radius: 50%; overflow: hidden; border: 4px solid #2DD4BF; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5); background: #16131F;">
+              <img
+                src="/images/founder-photo.png"
+                alt="Shawn Garland - Founder of Awakened AI"
+                style="width: 180%; height: 180%; object-fit: cover; object-position: 50% 0%; transform: translate(0%, -5%);"
+                loading="lazy"
+              />
             </div>
 
             <!-- Info -->
