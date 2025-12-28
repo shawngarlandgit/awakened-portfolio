@@ -1,0 +1,491 @@
+---
+// Gallery Setup Page - Drag and drop to reorder photos
+// Access at /gallery-setup
+
+interface Photo {
+  src: string;
+  alt: string;
+  category: string;
+  aspectRatio: 'portrait' | 'landscape' | 'square';
+}
+
+const photos: Photo[] = [
+  // B&W Photos - grouped together
+  { src: '/images/gallery/Breaking Point.jpg', alt: 'Breaking Point', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1926.jpg', alt: 'Skateboarder', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Round Here.jpg', alt: 'Round Here', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/7BB986A3-E74A-43D0-A404-7B74429C629A.jpg', alt: 'Band Performance', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/481CFDE7-1D8E-409E-BBD1-CBE4084FCF18.jpg', alt: 'Doorway Silhouette', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8142.jpg', alt: 'Barber Chair', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8383.jpg', alt: 'The Barber', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1020522.jpg', alt: 'Diner Scene', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF2046.jpg', alt: 'Fire Juggler', category: 'B&W', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_7016-Enhanced-NR.jpg', alt: 'Stepping Stones', category: 'B&W', aspectRatio: 'portrait' },
+
+  // Sunset/Golden Hour - warm tones
+  { src: '/images/gallery/IMG_0111.jpg', alt: 'Sailboat Sunset', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Chasing Light.jpg', alt: 'Chasing Light', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Dennis & I.jpeg', alt: 'Dennis & I', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Guilty Pleasure.jpeg', alt: 'Guilty Pleasure', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Leading Lines.jpg', alt: 'Leading Lines', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0276.jpg', alt: 'Lighthouse at Dusk', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_5285.JPG', alt: 'The Fisherman', category: 'Sunset', aspectRatio: 'square' },
+  { src: '/images/gallery/DSCF2016-Enhanced-NR.jpg', alt: 'Beach Sunset', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_5278-Enhanced-NR.jpg', alt: 'Purple Pier', category: 'Sunset', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_5279.jpg', alt: 'Golden Hour Pier', category: 'Sunset', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSCF2025.jpg', alt: 'Lifeguard Station', category: 'Sunset', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_5336-Enhanced-NR.jpg', alt: 'Beach Photographer', category: 'Sunset', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_5384.jpg', alt: 'Couple at Sunset', category: 'Sunset', aspectRatio: 'square' },
+
+  // Nature/Autumn - warm to cool transition
+  { src: '/images/gallery/IMG_0001.JPG', alt: 'Autumn Falls', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_0007.JPG', alt: 'Forest Path', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_4757.jpg', alt: 'Railroad Tracks', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Let It Go.jpeg', alt: 'Let It Go', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Tiny Dots_Endless Timeline.jpeg', alt: 'Tiny Dots, Endless Timeline', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSC05704.jpg', alt: 'Waterfall Explorer', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSC05800.jpg', alt: 'Autumn Cascade', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF7839.jpg', alt: 'Rainy Drive', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_4868.jpg', alt: 'River Bend', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSC05926.jpg', alt: 'Forest Hike', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_0805.jpg', alt: 'Autumn Trail', category: 'Nature', aspectRatio: 'portrait' },
+
+  // Ocean/Blue tones
+  { src: '/images/gallery/Just A Snapshoot.jpg', alt: 'Just A Snapshot', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF7452.JPG', alt: 'Blue Hour', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1948.jpg', alt: 'Harbor Morning', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1959.jpg', alt: 'Pier Life', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1964.jpg', alt: 'Paddleboarders', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_5338.jpg', alt: 'Pink Surf', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1685.jpg', alt: 'Beach House', category: 'Ocean', aspectRatio: 'portrait' },
+
+  // Street Photography
+  { src: '/images/gallery/DSCF0016.jpg', alt: 'The Clown', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSCF0255.jpg', alt: 'Dino Day', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF0647.jpg', alt: 'Classic Ride', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1309.jpg', alt: 'Pineapple Prep', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF3780.jpg', alt: 'Man & Dog', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF9164.jpg', alt: 'City Portrait', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1918.jpg', alt: 'Love N Happiness', category: 'Street', aspectRatio: 'portrait' },
+
+  // Urban/Architecture
+  { src: '/images/gallery/IMG_0459 copy.JPG', alt: 'Hotel Geometry', category: 'Urban', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_4696.JPG', alt: 'War Bird', category: 'Urban', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8845.jpg', alt: 'Circular Art', category: 'Urban', aspectRatio: 'landscape' },
+
+  // Animals
+  { src: '/images/gallery/DSCF9425.JPG', alt: 'Good Boy', category: 'Animals', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF9473.JPG', alt: 'Little Friend', category: 'Animals', aspectRatio: 'landscape' },
+
+  // Night/Dark moody
+  { src: '/images/gallery/Contemplation in Cali.jpg', alt: 'Contemplation in Cali', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/The Devils In The Details.jpg', alt: 'The Devil\'s In The Details', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/5776B90D-7048-4810-B701-5B3B64E23AFA.jpg', alt: 'Night Cap', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8562.jpg', alt: 'City Nights', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Red White & Dead.jpg', alt: 'Red White & Dead', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0021.JPG', alt: 'Light Painting', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8547.jpg', alt: 'Luna Bar', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8773.jpg', alt: 'Fire Album', category: 'Night', aspectRatio: 'landscape' },
+
+  // Concert/Events
+  { src: '/images/gallery/DSCF5033.JPG', alt: 'Purple Haze', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/43EE8464-2CD2-4342-B6C8-D032CF322654-3476-000001CF2CC9FF47.jpg', alt: 'Stage Lights', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/6CA944DE-A193-4F53-8DBD-03F8CB137483-3476-000001D092638575.jpg', alt: 'The Guitarist', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF2603.JPG', alt: 'Circus Act', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF5177.jpg', alt: 'Dark Stage', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF4930.jpg', alt: 'The Speaker', category: 'Concert', aspectRatio: 'landscape' },
+
+  // New Leica photos
+  { src: '/images/gallery/B3D5419A-6D9E-4263-9C50-4D24A91E2680.jpg', alt: 'Square Moment', category: 'Street', aspectRatio: 'square' },
+  { src: '/images/gallery/IMG_0433.JPG', alt: 'Golden View', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0791.JPG', alt: 'Vertical Vision', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_1425.JPG', alt: 'Portrait Study', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/L1020355.jpg', alt: 'Wide Angle', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1020563.jpg', alt: 'Street Scene', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1020573.jpg', alt: 'Tall Tale', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/L1020626.jpg', alt: 'Standing Tall', category: 'B&W', aspectRatio: 'portrait' },
+  { src: '/images/gallery/L1020662.jpg', alt: 'Leica Moment', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1030057.jpg', alt: 'Wide World', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1030191.jpg', alt: 'Open Road', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1030292.jpg', alt: 'Panoramic View', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1030349.jpg', alt: 'Vertical Journey', category: 'Nature', aspectRatio: 'portrait' },
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Setup - Drag & Drop</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1 { text-align: center; margin-bottom: 10px; }
+    .instructions {
+      text-align: center;
+      color: #888;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #2C786C; color: white; }
+    .btn-primary:hover { background: #3a9a8a; }
+    .btn-secondary { background: #333; color: white; }
+    .btn-secondary:hover { background: #444; }
+    .btn-danger { background: #dc3545; color: white; }
+    .filter-btn { background: #222; color: #888; border: 1px solid #333; }
+    .filter-btn.active { background: #2C786C; color: white; border-color: #2C786C; }
+    .filters { margin-bottom: 20px; }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-card {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: grab;
+      border: 3px solid #333;
+      transition: all 0.15s;
+      background: #222;
+      flex-shrink: 0;
+    }
+    .photo-card.landscape { border-color: #4a90d9; }
+    .photo-card.portrait { border-color: #d94a90; }
+    .photo-card.square { border-color: #90d94a; }
+    .photo-card:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .photo-card.dragging { opacity: 0.5; border-color: #ff0 !important; }
+    .photo-card.drag-over { border-color: #0ff !important; transform: scale(1.1); }
+    .photo-card.selected { box-shadow: 0 0 0 3px rgba(44,120,108,0.8); }
+    .photo-card img {
+      width: 100px !important;
+      height: 100px !important;
+      max-width: 100px !important;
+      max-height: 100px !important;
+      min-width: 100px !important;
+      min-height: 100px !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+    .photo-card .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.95));
+      padding: 18px 4px 3px;
+      z-index: 2;
+    }
+    .photo-card .title { font-size: 9px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .photo-card .category { font-size: 8px; color: #2C786C; }
+    .photo-card .index {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      background: rgba(0,0,0,0.8);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 10px;
+      color: #fff;
+      z-index: 2;
+      font-weight: bold;
+    }
+    .photo-card .aspect-badge {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 9px;
+      color: white;
+      z-index: 2;
+      font-weight: bold;
+    }
+    .photo-card.landscape .aspect-badge { background: #4a90d9; }
+    .photo-card.portrait .aspect-badge { background: #d94a90; }
+    .photo-card.square .aspect-badge { background: #90d94a; }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 15px;
+      font-size: 12px;
+    }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .legend .dot { width: 12px; height: 12px; border-radius: 3px; }
+    .legend .dot.l { background: #4a90d9; }
+    .legend .dot.p { background: #d94a90; }
+    .legend .dot.s { background: #90d94a; }
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 100;
+      padding: 20px;
+      overflow: auto;
+    }
+    .modal.show { display: block; }
+    .modal-content {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .modal h2 { margin-bottom: 15px; }
+    .modal pre {
+      background: #000;
+      padding: 15px;
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 60vh;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .modal .actions { margin-top: 15px; display: flex; gap: 10px; }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2C786C;
+      padding: 12px 20px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>Gallery Setup</h1>
+  <p class="instructions">Drag & drop to reorder. Click to select multiple, then drag to move together.</p>
+
+  <div class="controls">
+    <button class="btn-primary" id="exportBtn">Export Code</button>
+    <button class="btn-secondary" id="resetBtn">Reset Order</button>
+    <button class="btn-secondary" id="clearSelection">Clear Selection</button>
+  </div>
+
+  <div class="legend">
+    <span><div class="dot l"></div> Landscape (wide)</span>
+    <span><div class="dot p"></div> Portrait (tall)</span>
+    <span><div class="dot s"></div> Square</span>
+  </div>
+
+  <div class="controls filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="b&w">B&W</button>
+    <button class="filter-btn" data-filter="sunset">Sunset</button>
+    <button class="filter-btn" data-filter="nature">Nature</button>
+    <button class="filter-btn" data-filter="ocean">Ocean</button>
+    <button class="filter-btn" data-filter="street">Street</button>
+    <button class="filter-btn" data-filter="urban">Urban</button>
+    <button class="filter-btn" data-filter="animals">Animals</button>
+    <button class="filter-btn" data-filter="night">Night</button>
+    <button class="filter-btn" data-filter="concert">Concert</button>
+  </div>
+
+  <div class="grid" id="photoGrid"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Export Photo Array</h2>
+      <p style="color:#888;margin-bottom:15px;font-size:13px;">Copy this code and replace the photos array in GallerySection.astro</p>
+      <pre id="codeOutput"></pre>
+      <div class="actions">
+        <button class="btn-primary" id="copyBtn">Copy to Clipboard</button>
+        <button class="btn-secondary" id="closeModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script define:vars={{ photos }}>
+    let photoData = [...photos];
+    let originalOrder = [...photos];
+    let selectedCards = new Set();
+    let draggedIndex = null;
+    let currentFilter = 'all';
+
+    const grid = document.getElementById('photoGrid');
+    const modal = document.getElementById('modal');
+    const toast = document.getElementById('toast');
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      photoData.forEach((photo, index) => {
+        if (currentFilter !== 'all' && photo.category.toLowerCase() !== currentFilter) {
+          return;
+        }
+        const card = document.createElement('div');
+        card.className = 'photo-card ' + photo.aspectRatio + (selectedCards.has(index) ? ' selected' : '');
+        card.dataset.index = index;
+        card.draggable = true;
+        card.innerHTML = `
+          <img src="${photo.src}" alt="${photo.alt}" loading="lazy" width="100" height="100" style="width:100px !important; height:100px !important; max-width:100px !important; max-height:100px !important; object-fit:cover !important; display:block !important;">
+          <span class="index">#${index + 1}</span>
+          <span class="aspect-badge">${photo.aspectRatio.charAt(0).toUpperCase()}</span>
+          <div class="overlay">
+            <div class="title">${photo.alt}</div>
+            <div class="category">${photo.category}</div>
+          </div>
+        `;
+
+        card.addEventListener('click', (e) => {
+          if (e.shiftKey || e.metaKey) {
+            if (selectedCards.has(index)) {
+              selectedCards.delete(index);
+              card.classList.remove('selected');
+            } else {
+              selectedCards.add(index);
+              card.classList.add('selected');
+            }
+          }
+        });
+
+        card.addEventListener('dragstart', (e) => {
+          draggedIndex = index;
+          card.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        card.addEventListener('dragend', () => {
+          card.classList.remove('dragging');
+          document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+        });
+
+        card.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          card.classList.add('drag-over');
+        });
+
+        card.addEventListener('dragleave', () => {
+          card.classList.remove('drag-over');
+        });
+
+        card.addEventListener('drop', (e) => {
+          e.preventDefault();
+          card.classList.remove('drag-over');
+          const targetIndex = parseInt(card.dataset.index);
+
+          if (draggedIndex !== null && draggedIndex !== targetIndex) {
+            if (selectedCards.size > 0 && selectedCards.has(draggedIndex)) {
+              // Move all selected items
+              const selectedIndices = Array.from(selectedCards).sort((a, b) => a - b);
+              const selectedItems = selectedIndices.map(i => photoData[i]);
+
+              // Remove selected items
+              for (let i = selectedIndices.length - 1; i >= 0; i--) {
+                photoData.splice(selectedIndices[i], 1);
+              }
+
+              // Find new target index after removal
+              let newTargetIndex = targetIndex;
+              selectedIndices.forEach(i => {
+                if (i < targetIndex) newTargetIndex--;
+              });
+
+              // Insert at new position
+              photoData.splice(newTargetIndex, 0, ...selectedItems);
+              selectedCards.clear();
+            } else {
+              // Move single item
+              const [item] = photoData.splice(draggedIndex, 1);
+              photoData.splice(targetIndex, 0, item);
+            }
+            renderGrid();
+          }
+          draggedIndex = null;
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function generateCode() {
+      let code = 'const photos: Photo[] = [\n';
+      let currentCategory = '';
+
+      photoData.forEach((photo, i) => {
+        if (photo.category !== currentCategory) {
+          if (currentCategory) code += '\n';
+          code += `  // ${photo.category}\n`;
+          currentCategory = photo.category;
+        }
+        const alt = photo.alt.replace(/'/g, "\\'");
+        code += `  { src: '${photo.src}', alt: '${alt}', category: '${photo.category}', aspectRatio: '${photo.aspectRatio}' },\n`;
+      });
+
+      code += '];';
+      return code;
+    }
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      document.getElementById('codeOutput').textContent = generateCode();
+      modal.classList.add('show');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(generateCode());
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      photoData = [...originalOrder];
+      selectedCards.clear();
+      renderGrid();
+    });
+
+    document.getElementById('clearSelection').addEventListener('click', () => {
+      selectedCards.clear();
+      renderGrid();
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    renderGrid();
+  </script>
+</body>
+</html>

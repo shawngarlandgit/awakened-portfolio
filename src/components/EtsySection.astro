@@ -1,0 +1,350 @@
+---
+// Etsy Designs showcase section
+
+interface Product {
+  name: string;
+  description: string;
+  price: string;
+  category: string;
+  image: string;
+  url: string;
+  bestseller?: boolean;
+  new?: boolean;
+}
+
+const products: Product[] = [
+  // Slavic Mythology Collection
+  {
+    name: 'In My Baba Yaga Era Sweatshirt',
+    description: 'Slavic mythology folklore, cottagecore aesthetic with mushroom and floral design.',
+    price: '$38.95',
+    category: 'Sweatshirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/afb230/7516355044/il_fullxfull.7516355044_fyoc.jpg',
+    url: 'https://www.etsy.com/listing/4374121328/in-my-baba-yaga-era-sweatshirt-slavic',
+    bestseller: true
+  },
+  {
+    name: 'Slavic Mythology Sweatshirt',
+    description: 'Baba Yaga, Leshy, Rusalka witchy sweatshirt with folklore art.',
+    price: '$38.95',
+    category: 'Sweatshirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/3445f2/7354658832/il_fullxfull.7354658832_1t93.jpg',
+    url: 'https://www.etsy.com/listing/4374161049/slavic-mythology-sweatshirt-baba-yaga',
+    bestseller: true
+  },
+  {
+    name: 'Baba Yaga Sweatshirt',
+    description: 'Slavic folklore witchcore, mystical forest fairycore woodland design.',
+    price: '$38.95',
+    category: 'Sweatshirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/4ae54a/7304469223/il_fullxfull.7304469223_a31r.jpg',
+    url: 'https://www.etsy.com/listing/4374152320/baba-yaga-sweatshirt-slavic-folklore'
+  },
+  {
+    name: 'Cotton Slavic Mythology Sweatshirt',
+    description: 'Baba Yaga, Rusalka, Forest Nymph mythical creatures folklore art.',
+    price: '$38.95',
+    category: 'Sweatshirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/3fa7eb/7304470067/il_fullxfull.7304470067_5gk8.jpg',
+    url: 'https://www.etsy.com/listing/4374161085/cotton-slavic-mythology-sweatshirt-with'
+  },
+  // ADHD & Neurodivergent Collection
+  {
+    name: 'Funny ADHD Shirt - Brain Takes Detours',
+    description: 'Neurodivergent pride tee, mental health awareness gift.',
+    price: '$29.99',
+    category: 'T-Shirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/4ab75a/6886852798/il_fullxfull.6886852798_adwy.jpg',
+    url: 'https://www.etsy.com/listing/4300812160/funny-adhd-shirt-neurodivergent-pride',
+    bestseller: true
+  },
+  {
+    name: 'Retro ADHD Squirrel Shirt',
+    description: 'Funny neurodivergent tee with vintage style mental health message.',
+    price: '$29.99',
+    category: 'T-Shirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/da48e6/7171388241/il_fullxfull.7171388241_ac13.jpg',
+    url: 'https://www.etsy.com/listing/4300815272/retro-adhd-squirrel-shirt-funny'
+  },
+  {
+    name: 'I Was Not Made To Be Subtle',
+    description: 'Bold statement tee with retro graphic, vintage inspired design.',
+    price: '$29.99',
+    category: 'T-Shirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/0c0a1e/6966575588/il_fullxfull.6966575588_7s79.jpg',
+    url: 'https://www.etsy.com/listing/4325490682/i-was-not-made-to-be-subtle-t-shirt',
+    new: true
+  },
+  {
+    name: 'Every Day Is Flagg Day T-Shirt',
+    description: 'Show your Cowboys pride with this #32 jersey-style graphic tee.',
+    price: '$29.99',
+    category: 'T-Shirts',
+    image: 'https://i.etsystatic.com/49826398/r/il/55f276/7520927810/il_1588xN.7520927810_mw8d.jpg',
+    url: 'https://www.etsy.com/listing/4426809687/every-day-is-flagg-day-32-t-shirt',
+    new: true
+  }
+];
+
+const categories = ['All', 'T-Shirts', 'Sweatshirts'];
+---
+
+<section id="etsy" class="py-24 md:py-32 relative">
+  <div class="container mx-auto px-6">
+    <!-- Section header -->
+    <div class="text-center mb-16 etsy-header">
+      <p class="text-[#F5E9D3] text-sm md:text-base uppercase tracking-widest mb-4">Shop</p>
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        Etsy <span class="text-gradient-sand">Designs</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg">
+        Sensory-friendly fashion, productivity tools, and art designed for different minds.
+      </p>
+    </div>
+
+    <!-- Category filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 etsy-filters">
+      {categories.map((category, index) => (
+        <button
+          class={`category-btn px-4 py-2 rounded-full text-sm transition-colors ${
+            index === 0
+              ? 'bg-[#F5E9D3]/20 text-[#F5E9D3] border border-[#F5E9D3]/30'
+              : 'bg-white/5 text-white/60 border border-white/10 hover:bg-white/10'
+          }`}
+          data-category={category.toLowerCase()}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <!-- Products grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 products-grid">
+      {products.map((product, index) => (
+        <a
+          href={product.url || 'https://www.etsy.com/shop/AwakeningApparel'}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="product-card group relative overflow-hidden rounded-2xl bg-white/5 border border-white/5 hover:border-[#F5E9D3]/30 transition-all duration-500 cursor-pointer block"
+          data-category={product.category.toLowerCase()}
+          data-index={index}
+        >
+          <!-- Product Image -->
+          <div class="relative aspect-square bg-gradient-to-br from-[#F5E9D3]/10 to-[#4B3F72]/10 overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+
+            <!-- Badges -->
+            <div class="absolute top-2 left-2 flex flex-col gap-1">
+              {product.bestseller && (
+                <span class="px-2 py-1 rounded text-xs bg-[#F67280] text-white font-medium">
+                  Bestseller
+                </span>
+              )}
+              {product.new && (
+                <span class="px-2 py-1 rounded text-xs bg-[#5B9BD5] text-white font-medium">
+                  New
+                </span>
+              )}
+            </div>
+
+            <!-- Quick view overlay -->
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="px-4 py-2 rounded-full bg-white text-black text-sm font-medium transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                Quick View
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-4">
+            <!-- Category -->
+            <span class="text-[#F5E9D3]/60 text-xs uppercase tracking-wide">
+              {product.category}
+            </span>
+
+            <!-- Name -->
+            <h3 class="text-white font-medium mt-1 mb-1 line-clamp-1 group-hover:text-[#F5E9D3] transition-colors">
+              {product.name}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-white/40 text-sm line-clamp-2 mb-3">
+              {product.description}
+            </p>
+
+            <!-- Price -->
+            <div class="flex items-center justify-between">
+              <span class="text-[#F67280] font-semibold">
+                {product.price}
+              </span>
+              <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-[#F5E9D3]/20 hover:text-[#F5E9D3] transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Shop CTA -->
+    <div class="mt-16 text-center">
+      <div class="glass-dark rounded-3xl p-8 md:p-12 max-w-3xl mx-auto etsy-cta">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <svg class="w-8 h-8 text-[#F5E9D3]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.023 0C5.376 0 0 5.376 0 12.023 0 18.67 5.376 24 12.023 24 18.67 24 24 18.67 24 12.023 24 5.376 18.67 0 12.023 0zm4.628 17.636c-.404.708-1.197 1.225-2.155 1.225-1.042 0-1.877-.577-2.31-1.337-.202-.354-.374-.744-.517-1.168-.143-.424-.257-.882-.344-1.373-.173-.978-.259-2.088-.259-3.303 0-1.215.086-2.325.259-3.303.087-.491.201-.949.344-1.373.143-.424.315-.814.517-1.168.433-.76 1.268-1.337 2.31-1.337.958 0 1.751.517 2.155 1.225.404.708.633 1.587.633 2.584h-1.71c0-.596-.115-1.112-.316-1.525-.201-.413-.491-.654-.908-.654-.417 0-.707.241-.908.654-.201.413-.316.929-.316 1.525v5.662c0 .596.115 1.112.316 1.525.201.413.491.654.908.654.417 0 .707-.241.908-.654.201-.413.316-.929.316-1.525h1.71c0 .997-.229 1.876-.633 2.584z"/>
+          </svg>
+          <span class="text-2xl font-bold text-white">Awakening Apparel</span>
+        </div>
+        <p class="text-white/60 mb-6">
+          Visit our Etsy shop for the full collection of sensory-friendly fashion, digital products, and art prints.
+        </p>
+        <a
+          href="https://www.etsy.com/shop/AwakeningApparel"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#F5E9D3] text-[#0a0a0f] font-semibold hover:bg-white transition-colors"
+        >
+          Shop on Etsy
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Header animation
+    gsap.fromTo('.etsy-header',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#etsy',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Filters
+    gsap.fromTo('.etsy-filters',
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.etsy-filters',
+          start: 'top 90%',
+          end: 'top 70%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Products stagger
+    gsap.fromTo('.product-card',
+      { y: 60, opacity: 0, scale: 0.95 },
+      {
+        scrollTrigger: {
+          trigger: '.products-grid',
+          start: 'top 85%',
+          end: 'top 40%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.05,
+        ease: 'power3.out'
+      }
+    );
+
+    // CTA
+    gsap.fromTo('.etsy-cta',
+      { y: 50, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.etsy-cta',
+          start: 'top 90%',
+          end: 'top 70%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Category filter functionality
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        // Update active state
+        categoryBtns.forEach(b => {
+          b.classList.remove('bg-[#F5E9D3]/20', 'text-[#F5E9D3]', 'border-[#F5E9D3]/30');
+          b.classList.add('bg-white/5', 'text-white/60', 'border-white/10');
+        });
+        btn.classList.remove('bg-white/5', 'text-white/60', 'border-white/10');
+        btn.classList.add('bg-[#F5E9D3]/20', 'text-[#F5E9D3]', 'border-[#F5E9D3]/30');
+
+        // Filter products
+        productCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (category === 'all' || cardCategory === category) {
+            gsap.to(card, { opacity: 1, scale: 1, duration: 0.3 });
+            (card as HTMLElement).style.display = '';
+          } else {
+            gsap.to(card, { opacity: 0, scale: 0.9, duration: 0.3, onComplete: () => {
+              (card as HTMLElement).style.display = 'none';
+            }});
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .text-gradient-sand {
+    background: linear-gradient(135deg, #F5E9D3 0%, #8B5A2B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

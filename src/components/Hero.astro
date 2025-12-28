@@ -1,0 +1,179 @@
+---
+// Hero component with horizontal scroll text animation using GSAP
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background gradient mesh -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]"></div>
+
+  <!-- Animated grid pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(75, 63, 114, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(75, 63, 114, 0.3) 1px, transparent 1px); background-size: 50px 50px;"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Main title with character animation -->
+    <div class="text-center mb-8">
+      <p class="text-[#F67280] text-lg md:text-xl mb-4 opacity-0 hero-subtitle">Multi-brand Creative Studio</p>
+      <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-bold mb-6">
+        <span class="block text-gradient">Awakened</span>
+        <span class="block text-white/90">AI</span>
+      </h1>
+    </div>
+
+    <!-- Horizontal scroll tagline -->
+    <div class="horizontal-scroll-container overflow-hidden py-8 my-12">
+      <div class="horizontal-text flex items-center gap-8 text-2xl md:text-4xl lg:text-5xl font-light text-white/60 whitespace-nowrap">
+        <span class="inline-flex items-center gap-4">
+          <span class="text-[#F67280]">Different minds</span>
+          <svg class="w-8 h-8 text-[#4B3F72]" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"/>
+          </svg>
+        </span>
+        <span>deserve</span>
+        <span class="inline-flex items-center gap-4">
+          <span class="text-[#5B9BD5]">different tools</span>
+          <svg class="w-8 h-8 text-[#4B3F72]" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"/>
+          </svg>
+        </span>
+        <span>and</span>
+        <span class="text-[#FFDD57]">better stories</span>
+        <span class="mx-8">|</span>
+        <span class="text-[#F5E9D3]">Fashion</span>
+        <span class="text-white/30">+</span>
+        <span class="text-[#5B9BD5]">Productivity</span>
+        <span class="text-white/30">+</span>
+        <span class="text-[#2C786C]">Visual Art</span>
+        <span class="text-white/30">+</span>
+        <span class="text-[#7B68A3]">Tech</span>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 hero-stats">
+      <div class="text-center opacity-0 stat-item">
+        <p class="text-4xl md:text-5xl font-bold text-[#F67280]">10</p>
+        <p class="text-white/60 text-sm mt-1">Brands</p>
+      </div>
+      <div class="text-center opacity-0 stat-item">
+        <p class="text-4xl md:text-5xl font-bold text-[#5B9BD5]">6</p>
+        <p class="text-white/60 text-sm mt-1">Applications</p>
+      </div>
+      <div class="text-center opacity-0 stat-item">
+        <p class="text-4xl md:text-5xl font-bold text-[#FFDD57]">1</p>
+        <p class="text-white/60 text-sm mt-1">Mission</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator - positioned at bottom of section -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center scroll-indicator opacity-0 z-10">
+    <p class="text-white/40 text-sm mb-2">Scroll to explore</p>
+    <div class="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
+      <div class="w-1.5 h-3 bg-[#F67280] rounded-full mt-2 scroll-dot"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Initialize GSAP animations
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero title animation
+    gsap.fromTo('.hero-title span',
+      { y: 100, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: 'power4.out'
+      }
+    );
+
+    // Subtitle animation
+    gsap.fromTo('.hero-subtitle',
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: 'power3.out' }
+    );
+
+    // Stats animation
+    gsap.fromTo('.stat-item',
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        delay: 1,
+        ease: 'power3.out'
+      }
+    );
+
+    // Scroll indicator
+    gsap.fromTo('.scroll-indicator',
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 1.5 }
+    );
+
+    // Scroll dot bounce animation
+    gsap.to('.scroll-dot', {
+      y: 10,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // Horizontal text scroll animation - moves based on page scroll
+    const horizontalText = document.querySelector('.horizontal-text');
+    if (horizontalText) {
+      gsap.to('.horizontal-text', {
+        xPercent: -50,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: '60% top',
+          scrub: 0.5
+        }
+      });
+    }
+
+    // Parallax effect on scroll
+    gsap.to('.hero-title', {
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+      },
+      y: -100,
+      opacity: 0.3
+    });
+  });
+</script>
+
+<style>
+  .horizontal-scroll-container {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #F67280 0%, #4B3F72 50%, #5B9BD5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>

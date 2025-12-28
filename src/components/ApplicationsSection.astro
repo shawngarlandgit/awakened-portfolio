@@ -1,0 +1,362 @@
+---
+// Applications section showcasing the 6 tech projects
+import { Icon } from 'astro-icon/components';
+
+interface App {
+  name: string;
+  description: string;
+  tech: string[];
+  status: 'production' | 'development' | 'beta';
+  icon: string;
+  color: string;
+  url?: string;
+  github?: string;
+}
+
+const applications: App[] = [
+  {
+    name: 'Neuro-Pipeline',
+    description: 'Social media content factory that transforms voice notes into multi-platform posts for ADHD audience. Automated L0-L6 pipeline with AI-powered content generation.',
+    tech: ['Node.js', 'Supabase', 'n8n', 'Claude AI', 'BullMQ'],
+    status: 'production',
+    icon: 'heroicons:cpu-chip',
+    color: '#F67280'
+  },
+  {
+    name: 'dtwrm-assistant',
+    description: 'AI-powered assistant for the Dreamware ecosystem. Intelligent automation and workflow management for creative professionals.',
+    tech: ['TypeScript', 'React', 'OpenAI', 'Supabase'],
+    status: 'development',
+    icon: 'heroicons:chat-bubble-left-right',
+    color: '#5B9BD5'
+  },
+  {
+    name: 'Cannabis Admin',
+    description: 'Comprehensive dispensary management system with inventory tracking, compliance reporting, and customer management.',
+    tech: ['React', 'Node.js', 'PostgreSQL', 'Redis'],
+    status: 'production',
+    icon: 'heroicons:clipboard-document-list',
+    color: '#2C786C'
+  },
+  {
+    name: 'Tour Conflict Detector',
+    description: 'Scheduling optimization tool for touring musicians. Detects conflicts, calculates travel times, and suggests optimal routing.',
+    tech: ['Python', 'FastAPI', 'Google Maps API', 'React'],
+    status: 'beta',
+    icon: 'heroicons:calendar-days',
+    color: '#FFDD57'
+  },
+  {
+    name: 'NFL Dashboard Landing',
+    description: 'Real-time NFL statistics dashboard with live scoring, player analytics, and fantasy football integration.',
+    tech: ['Next.js', 'D3.js', 'WebSockets', 'ESPN API'],
+    status: 'production',
+    icon: 'heroicons:chart-bar',
+    color: '#4B3F72'
+  },
+  {
+    name: 'RV Roamer',
+    description: 'Travel planning app for RV enthusiasts. Route optimization, campground discovery, and community reviews.',
+    tech: ['React Native', 'Node.js', 'MongoDB', 'Mapbox'],
+    status: 'development',
+    icon: 'heroicons:map',
+    color: '#F5E9D3'
+  }
+];
+
+const statusStyles = {
+  production: { bg: 'bg-green-500/20', text: 'text-green-400', label: 'Production' },
+  development: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'In Development' },
+  beta: { bg: 'bg-blue-500/20', text: 'text-blue-400', label: 'Beta' }
+};
+---
+
+<section id="applications" class="py-24 md:py-32 relative bg-gradient-to-b from-transparent via-[#0d0d15] to-transparent">
+  <div class="container mx-auto px-6">
+    <!-- Section header -->
+    <div class="text-center mb-16 apps-header">
+      <p class="text-[#5B9BD5] text-sm md:text-base uppercase tracking-widest mb-4">Tech Portfolio</p>
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        Applications <span class="text-gradient">Built</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg">
+        Full-stack applications solving real problems with modern technologies.
+      </p>
+    </div>
+
+    <!-- Applications grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 apps-grid">
+      {applications.map((app, index) => (
+        <div
+          class="app-card group relative overflow-hidden rounded-3xl p-6 md:p-8 glass-dark border border-white/5 hover:border-white/20 transition-all duration-500"
+          style={`--app-color: ${app.color};`}
+          data-index={index}
+        >
+          <!-- Gradient background -->
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+            style={`background: radial-gradient(circle at top right, ${app.color}, transparent 70%);`}
+          />
+
+          <!-- Content -->
+          <div class="relative z-10">
+            <!-- Header -->
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="w-14 h-14 rounded-2xl flex items-center justify-center"
+                style={`background: ${app.color}20; color: ${app.color};`}
+              >
+                <Icon name={app.icon} class="w-7 h-7" />
+              </div>
+
+              <span class={`px-3 py-1 rounded-full text-xs font-medium ${statusStyles[app.status].bg} ${statusStyles[app.status].text}`}>
+                {statusStyles[app.status].label}
+              </span>
+            </div>
+
+            <!-- Name -->
+            <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-[var(--app-color)] transition-colors duration-300">
+              {app.name}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-white/50 text-sm leading-relaxed mb-6">
+              {app.description}
+            </p>
+
+            <!-- Tech stack -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              {app.tech.map((tech) => (
+                <span class="px-3 py-1 rounded-full text-xs bg-white/5 text-white/60 border border-white/10">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+              {app.url && (
+                <a
+                  href={app.url}
+                  class="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Live Demo
+                </a>
+              )}
+              {app.github && (
+                <a
+                  href={app.github}
+                  class="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  Source
+                </a>
+              )}
+              <div class="flex-grow"></div>
+              <div
+                class="w-2 h-2 rounded-full animate-pulse"
+                style={`background: ${app.color};`}
+              />
+            </div>
+          </div>
+
+          <!-- Animated border on hover -->
+          <div
+            class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={`box-shadow: inset 0 0 0 1px ${app.color}40;`}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Terminal-style decoration -->
+    <div class="mt-16 max-w-3xl mx-auto terminal-decoration">
+      <div class="glass-dark rounded-2xl overflow-hidden border border-white/10">
+        <!-- Terminal header -->
+        <div class="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
+          <div class="w-3 h-3 rounded-full bg-[#F67280]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FFDD57]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#2C786C]"></div>
+          <span class="ml-4 text-white/40 text-sm font-mono">~/awakened-ai/portfolio</span>
+        </div>
+        <!-- Terminal content with typing animation -->
+        <div class="p-6 font-mono text-sm terminal-content">
+          <p class="terminal-line line-1 opacity-0">
+            <span class="text-white/40">$ </span><span class="text-[#5B9BD5]">ls</span><span class="text-white/40"> applications/</span>
+          </p>
+          <p class="terminal-line line-2 opacity-0 mt-2">
+            <span class="text-white/60">neuro-pipeline/  dtwrm-assistant/  cannabis-admin/</span>
+          </p>
+          <p class="terminal-line line-3 opacity-0">
+            <span class="text-white/60">tour-conflict/   nfl-dashboard/    rv-roamer/</span>
+          </p>
+          <p class="terminal-line line-4 opacity-0 mt-4">
+            <span class="text-white/40">$ </span><span class="text-[#2C786C]">echo</span><span class="text-[#FFDD57]"> "Building the future, one app at a time."</span>
+          </p>
+          <p class="terminal-line line-5 opacity-0 mt-2">
+            <span class="text-white/60">Building the future, one app at a time.</span>
+          </p>
+          <p class="terminal-line line-6 opacity-0 mt-4">
+            <span class="text-white/40">$ </span><span class="terminal-cursor text-[#F67280]">_</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Header animation
+    gsap.fromTo('.apps-header',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#applications',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // App cards stagger animation
+    gsap.fromTo('.app-card',
+      { y: 100, opacity: 0, rotateX: 10 },
+      {
+        scrollTrigger: {
+          trigger: '.apps-grid',
+          start: 'top 85%',
+          end: 'top 40%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        stagger: 0.1,
+        ease: 'power3.out'
+      }
+    );
+
+    // Terminal decoration slide in
+    gsap.fromTo('.terminal-decoration',
+      { y: 50, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.terminal-decoration',
+          start: 'top 90%',
+          end: 'top 70%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Terminal typing animation
+    const terminalTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.terminal-content',
+        start: 'top 85%',
+        once: true
+      }
+    });
+
+    // Type each line sequentially with staggered timing
+    terminalTimeline
+      .to('.line-1', {
+        opacity: 1,
+        duration: 0.1,
+        onStart: () => typewriterEffect('.line-1', 50)
+      })
+      .to('.line-2', {
+        opacity: 1,
+        duration: 0.1,
+        delay: 0.8
+      }, '+=0.3')
+      .to('.line-3', {
+        opacity: 1,
+        duration: 0.1,
+        delay: 0.2
+      }, '+=0.2')
+      .to('.line-4', {
+        opacity: 1,
+        duration: 0.1,
+        onStart: () => typewriterEffect('.line-4', 40)
+      }, '+=0.5')
+      .to('.line-5', {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, '+=1.2')
+      .to('.line-6', {
+        opacity: 1,
+        duration: 0.2
+      }, '+=0.4');
+
+    // Typewriter effect helper
+    function typewriterEffect(selector: string, speed: number) {
+      const element = document.querySelector(selector);
+      if (!element) return;
+
+      const spans = element.querySelectorAll('span');
+      let charIndex = 0;
+
+      spans.forEach(span => {
+        const text = span.textContent || '';
+        span.textContent = '';
+        span.style.visibility = 'visible';
+
+        for (let i = 0; i < text.length; i++) {
+          setTimeout(() => {
+            span.textContent += text[i];
+          }, charIndex * speed);
+          charIndex++;
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(135deg, #5B9BD5 0%, #4B3F72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .app-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Terminal cursor blinking animation */
+  .terminal-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Smooth text reveal for non-typed lines */
+  .terminal-line {
+    transition: opacity 0.3s ease-out;
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+// Sticky navigation component
+
+const navItems = [
+  { label: 'Brands', href: '#brands' },
+  { label: 'Apps', href: '#applications' },
+  { label: 'Photos', href: '#photos' },
+  { label: 'Videos', href: '#videos' },
+  { label: 'Shop', href: '#etsy' },
+];
+---
+
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 nav-container">
+  <div class="glass-dark rounded-full px-2 py-2 flex items-center gap-1 nav-inner">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-white/10 transition-colors">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#F67280] to-[#4B3F72] flex items-center justify-center">
+        <span class="text-white font-bold text-sm">A</span>
+      </div>
+      <span class="text-white font-semibold hidden md:block">Awakened</span>
+    </a>
+
+    <!-- Divider -->
+    <div class="w-px h-6 bg-white/10 hidden md:block"></div>
+
+    <!-- Nav items -->
+    <div class="flex items-center gap-1">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          class="nav-link px-3 py-2 rounded-full text-sm text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+          data-section={item.href.replace('#', '')}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <a
+      href="https://awakenedai.online"
+      class="ml-2 px-4 py-2 rounded-full bg-[#F67280] text-white text-sm font-medium hover:bg-[#F67280]/80 transition-colors hidden md:block"
+    >
+      Main Site
+    </a>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap) return;
+
+    // Initial animation
+    gsap.fromTo('.nav-container',
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: 'power3.out' }
+    );
+
+    // Active state tracking
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = ['brands', 'applications', 'photos', 'videos', 'etsy'];
+
+    if (ScrollTrigger) {
+      sections.forEach(section => {
+        ScrollTrigger.create({
+          trigger: `#${section}`,
+          start: 'top center',
+          end: 'bottom center',
+          onEnter: () => updateActiveLink(section),
+          onEnterBack: () => updateActiveLink(section)
+        });
+      });
+    }
+
+    function updateActiveLink(activeSection: string) {
+      navLinks.forEach(link => {
+        const section = link.getAttribute('data-section');
+        if (section === activeSection) {
+          link.classList.add('bg-white/10', 'text-white');
+          link.classList.remove('text-white/60');
+        } else {
+          link.classList.remove('bg-white/10', 'text-white');
+          link.classList.add('text-white/60');
+        }
+      });
+    }
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            // @ts-ignore
+            gsap.to(window, {
+              duration: 1,
+              scrollTo: { y: target, offsetY: 100 },
+              ease: 'power3.inOut'
+            });
+          }
+        }
+      });
+    });
+
+    // Hide/show on scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll && currentScroll > 200) {
+        gsap.to('.nav-container', { y: -100, duration: 0.3, ease: 'power2.in' });
+      } else {
+        gsap.to('.nav-container', { y: 0, duration: 0.3, ease: 'power2.out' });
+      }
+
+      lastScroll = currentScroll;
+    });
+  });
+</script>
+
+<style>
+  .nav-container {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+</style>

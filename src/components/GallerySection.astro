@@ -1,0 +1,407 @@
+---
+// Photo gallery section with masonry layout and lightbox
+
+interface Photo {
+  src: string;
+  alt: string;
+  category: string;
+  aspectRatio: 'portrait' | 'landscape' | 'square';
+  objectPosition?: string;
+  featured?: boolean;
+}
+
+const photos: Photo[] = [
+  // B&W
+  { src: '/images/gallery/Round Here.jpg', alt: 'Round Here', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/481CFDE7-1D8E-409E-BBD1-CBE4084FCF18.jpg', alt: 'Doorway Silhouette', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/7BB986A3-E74A-43D0-A404-7B74429C629A.jpg', alt: 'Band Performance', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Breaking Point.jpg', alt: 'Breaking Point', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1926.jpg', alt: 'Skateboarder', category: 'B&W', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_7016-Enhanced-NR.jpg', alt: 'Stepping Stones', category: 'B&W', aspectRatio: 'portrait' },
+  { src: '/images/gallery/L1020522.jpg', alt: 'Diner Scene', category: 'B&W', aspectRatio: 'landscape', objectPosition: 'left center' },
+  { src: '/images/gallery/DSCF8142.jpg', alt: 'Barber Chair', category: 'B&W', aspectRatio: 'landscape', objectPosition: 'left center' },
+
+  // Night
+  { src: '/images/gallery/DSCF8547.jpg', alt: 'Luna Bar', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/The Devils In The Details.jpg', alt: 'The Devil\'s In The Details', category: 'Night', aspectRatio: 'landscape', objectPosition: 'left center' },
+  { src: '/images/gallery/DSCF8773.jpg', alt: 'Fire Album', category: 'Night', aspectRatio: 'landscape', objectPosition: 'left center' },
+
+  // Sunset
+  { src: '/images/gallery/IMG_5278-Enhanced-NR.jpg', alt: 'Purple Pier', category: 'Sunset', aspectRatio: 'portrait' },
+
+  // Night
+  { src: '/images/gallery/IMG_0021.JPG', alt: 'Light Painting', category: 'Night', aspectRatio: 'landscape' },
+
+  // Concert
+  { src: '/images/gallery/DSCF5033.JPG', alt: 'Purple Haze', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/43EE8464-2CD2-4342-B6C8-D032CF322654-3476-000001CF2CC9FF47.jpg', alt: 'Stage Lights', category: 'Concert', aspectRatio: 'landscape' },
+  { src: '/images/gallery/6CA944DE-A193-4F53-8DBD-03F8CB137483-3476-000001D092638575.jpg', alt: 'The Guitarist', category: 'Concert', aspectRatio: 'landscape' },
+
+
+  // Nature
+  { src: '/images/gallery/IMG_0433.JPG', alt: 'Golden View', category: 'Nature', aspectRatio: 'landscape' },
+
+  // Night
+  { src: '/images/gallery/5776B90D-7048-4810-B701-5B3B64E23AFA.jpg', alt: 'Night Cap', category: 'Night', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF8562.jpg', alt: 'City Nights', category: 'Night', aspectRatio: 'landscape' },
+
+  // Nature
+  { src: '/images/gallery/DSCF7839.jpg', alt: 'Rainy Drive', category: 'Nature', aspectRatio: 'landscape' },
+
+  // B&W
+  { src: '/images/gallery/L1020626.jpg', alt: 'Standing Tall', category: 'B&W', aspectRatio: 'portrait' },
+
+  // Street
+  { src: '/images/gallery/L1020563.jpg', alt: 'Street Scene', category: 'Street', aspectRatio: 'landscape', objectPosition: 'left bottom' },
+  { src: '/images/gallery/L1020573.jpg', alt: 'Tall Tale', category: 'Street', aspectRatio: 'portrait' },
+
+  // Night
+  { src: '/images/gallery/Contemplation in Cali.jpg', alt: 'Contemplation in Cali', category: 'Night', aspectRatio: 'landscape' },
+
+  // Street
+  { src: '/images/gallery/B3D5419A-6D9E-4263-9C50-4D24A91E2680.jpg', alt: 'Square Moment', category: 'Street', aspectRatio: 'square' },
+
+  // Sunset
+  { src: '/images/gallery/DSCF2025.jpg', alt: 'Lifeguard Station', category: 'Sunset', aspectRatio: 'portrait' },
+  { src: '/images/gallery/Leading Lines.jpg', alt: 'Leading Lines', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_5285.JPG', alt: 'The Fisherman', category: 'Sunset', aspectRatio: 'square', objectPosition: 'left center' },
+  { src: '/images/gallery/DSCF2016-Enhanced-NR.jpg', alt: 'Beach Sunset', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/Chasing Light.jpg', alt: 'Chasing Light', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_5336-Enhanced-NR.jpg', alt: 'Beach Photographer', category: 'Sunset', aspectRatio: 'portrait' },
+
+  // Street
+  { src: '/images/gallery/IMG_1425.JPG', alt: 'Portrait Study', category: 'Street', aspectRatio: 'portrait' },
+
+  // Sunset
+  { src: '/images/gallery/IMG_5279.jpg', alt: 'Golden Hour Pier', category: 'Sunset', aspectRatio: 'portrait' },
+
+  // Street
+  { src: '/images/gallery/L1020355.jpg', alt: 'Wide Angle', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1020662.jpg', alt: 'Leica Moment', category: 'Street', aspectRatio: 'landscape', objectPosition: 'center top' },
+
+  // Ocean
+  { src: '/images/gallery/Just A Snapshoot.jpg', alt: 'Just A Snapshot', category: 'Ocean', aspectRatio: 'landscape', objectPosition: 'center bottom' },
+
+  // Nature
+  { src: '/images/gallery/IMG_4868.jpg', alt: 'River Bend', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSC05800.jpg', alt: 'Autumn Cascade', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0007.JPG', alt: 'Forest Path', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/IMG_0001.JPG', alt: 'Autumn Falls', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSC05926.jpg', alt: 'Forest Hike', category: 'Nature', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSC05704.jpg', alt: 'Waterfall Explorer', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_4757.jpg', alt: 'Railroad Tracks', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0805.jpg', alt: 'Autumn Trail', category: 'Nature', aspectRatio: 'portrait' },
+
+  // Animals
+  { src: '/images/gallery/DSCF9425.JPG', alt: 'Good Boy', category: 'Animals', aspectRatio: 'landscape' },
+
+  // Street
+  { src: '/images/gallery/DSCF1918.jpg', alt: 'Love N Happiness', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSCF3780.jpg', alt: 'Man & Dog', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF0016.jpg', alt: 'The Clown', category: 'Street', aspectRatio: 'portrait' },
+  { src: '/images/gallery/DSCF0255.jpg', alt: 'Dino Day', category: 'Street', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1309.jpg', alt: 'Pineapple Prep', category: 'Street', aspectRatio: 'landscape' },
+
+  // Concert
+  { src: '/images/gallery/DSCF2603.JPG', alt: 'Circus Act', category: 'Concert', aspectRatio: 'landscape', objectPosition: 'right center' },
+
+  // Nature
+  { src: '/images/gallery/L1030292.jpg', alt: 'Panoramic View', category: 'Nature', aspectRatio: 'landscape' },
+  { src: '/images/gallery/L1030057.jpg', alt: 'Wide World', category: 'Nature', aspectRatio: 'landscape', objectPosition: 'left center' },
+
+  // Ocean
+  { src: '/images/gallery/DSCF1685.jpg', alt: 'Beach House', category: 'Ocean', aspectRatio: 'portrait' },
+
+  // Urban
+  { src: '/images/gallery/DSCF8845.jpg', alt: 'Circular Art', category: 'Urban', aspectRatio: 'landscape' },
+
+  // Ocean
+  { src: '/images/gallery/DSCF1964.jpg', alt: 'Paddleboarders', category: 'Ocean', aspectRatio: 'landscape' },
+  { src: '/images/gallery/DSCF1959.jpg', alt: 'Pier Life', category: 'Ocean', aspectRatio: 'landscape', objectPosition: 'center center' },
+  { src: '/images/gallery/DSCF1948.jpg', alt: 'Harbor Morning', category: 'Ocean', aspectRatio: 'landscape' },
+
+  // Street
+  { src: '/images/gallery/DSCF0647.jpg', alt: 'Classic Ride', category: 'Street', aspectRatio: 'landscape' },
+
+  // Nature
+  { src: '/images/gallery/Tiny Dots_Endless Timeline.jpeg', alt: 'Tiny Dots, Endless Timeline', category: 'Nature', aspectRatio: 'landscape' },
+
+  // Nature
+  { src: '/images/gallery/L1030191.jpg', alt: 'Open Road', category: 'Nature', aspectRatio: 'landscape', objectPosition: 'left center' },
+  { src: '/images/gallery/L1030349.jpg', alt: 'Vertical Journey', category: 'Nature', aspectRatio: 'portrait' },
+
+  // Urban
+  { src: '/images/gallery/IMG_0459 copy.JPG', alt: 'Hotel Geometry', category: 'Urban', aspectRatio: 'landscape', objectPosition: 'right center' },
+  { src: '/images/gallery/IMG_4696.JPG', alt: 'War Bird', category: 'Urban', aspectRatio: 'landscape', objectPosition: 'left center' },
+
+  // Street
+  { src: '/images/gallery/DSCF9164.jpg', alt: 'City Portrait', category: 'Street', aspectRatio: 'landscape' },
+
+  // Concert
+  { src: '/images/gallery/DSCF5177.jpg', alt: 'Dark Stage', category: 'Concert', aspectRatio: 'landscape' },
+
+  // Ocean
+  { src: '/images/gallery/IMG_5338.jpg', alt: 'Pink Surf', category: 'Ocean', aspectRatio: 'landscape' },
+
+  // Sunset
+  { src: '/images/gallery/Guilty Pleasure.jpeg', alt: 'Guilty Pleasure', category: 'Sunset', aspectRatio: 'landscape' },
+  { src: '/images/gallery/IMG_0111.jpg', alt: 'Sailboat Sunset', category: 'Sunset', aspectRatio: 'landscape' },
+
+  // Sunset
+  { src: '/images/gallery/IMG_0276.jpg', alt: 'Lighthouse at Dusk', category: 'Sunset', aspectRatio: 'landscape' },
+
+  // Concert
+  { src: '/images/gallery/DSCF4930.jpg', alt: 'The Speaker', category: 'Concert', aspectRatio: 'landscape' },
+
+  // Animals - Featured closing photo
+  { src: '/images/gallery/DSCF9473.JPG', alt: 'Little Friend', category: 'Animals', aspectRatio: 'landscape', featured: true },
+
+];
+
+// All photos same size - no spanning
+const aspectClasses = {
+  portrait: '',
+  landscape: '',
+  square: ''
+};
+---
+
+<section id="photos" class="py-24 md:py-32 relative">
+  <div class="container mx-auto px-6">
+    <!-- Section header -->
+    <div class="text-center mb-16 gallery-header">
+      <p class="text-[#2C786C] text-sm md:text-base uppercase tracking-widest mb-4">Visual Archive</p>
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        Photo <span class="text-gradient-green">Gallery</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg">
+        Patterns, textures, and visual thinking from Awakened Visuals.
+      </p>
+    </div>
+
+    <!-- Category filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 gallery-filters">
+      <button class="filter-btn active px-4 py-2 rounded-full text-sm bg-[#2C786C]/20 text-[#2C786C] border border-[#2C786C]/30 hover:bg-[#2C786C]/30 transition-colors" data-filter="all">
+        All
+      </button>
+      {['B&W', 'Sunset', 'Nature', 'Ocean', 'Street', 'Night', 'Concert', 'Animals', 'Urban'].map(category => (
+        <button class="filter-btn px-4 py-2 rounded-full text-sm bg-white/5 text-white/60 border border-white/10 hover:bg-white/10 transition-colors" data-filter={category.toLowerCase()}>
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <!-- Photo grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 gallery-grid">
+      {photos.filter(p => !p.featured).map((photo, index) => (
+        <div
+          class={`gallery-item group relative overflow-hidden rounded-2xl cursor-pointer ${aspectClasses[photo.aspectRatio]}`}
+          data-category={photo.category.toLowerCase()}
+          data-index={index}
+        >
+          <!-- Actual image -->
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="w-full h-full min-h-[200px] md:min-h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
+            style={photo.objectPosition ? `object-position: ${photo.objectPosition}` : ''}
+            loading="lazy"
+          />
+
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <div>
+              <p class="text-white font-medium">{photo.alt}</p>
+              <p class="text-white/60 text-sm">{photo.category}</p>
+            </div>
+          </div>
+
+          <!-- Zoom icon -->
+          <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Featured photo centered at bottom -->
+    {photos.filter(p => p.featured).map((photo, index) => (
+      <div class="flex justify-center mt-8">
+        <div
+          class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer w-full max-w-3xl"
+          data-category={photo.category.toLowerCase()}
+          data-index={photos.length - 1}
+        >
+          <!-- Actual image -->
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="w-full h-full min-h-[400px] md:min-h-[600px] object-cover transition-transform duration-500 group-hover:scale-105"
+            style={photo.objectPosition ? `object-position: ${photo.objectPosition}` : ''}
+            loading="lazy"
+          />
+
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <div>
+              <p class="text-white font-medium">{photo.alt}</p>
+              <p class="text-white/60 text-sm">{photo.category}</p>
+            </div>
+          </div>
+
+          <!-- Zoom icon -->
+          <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</section>
+
+<!-- Lightbox (hidden by default) -->
+<div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center">
+  <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <button id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+  <div id="lightbox-content" class="max-w-5xl max-h-[80vh] mx-4">
+    <!-- Image will be inserted here -->
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    const gsap = window.gsap;
+    // @ts-ignore
+    const ScrollTrigger = window.ScrollTrigger;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    // Header animation
+    gsap.fromTo('.gallery-header',
+      { y: 60, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#photos',
+          start: 'top 80%',
+          end: 'top 50%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Filters animation
+    gsap.fromTo('.gallery-filters',
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.gallery-filters',
+          start: 'top 90%',
+          end: 'top 70%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1
+      }
+    );
+
+    // Gallery items stagger
+    gsap.fromTo('.gallery-item',
+      { y: 60, opacity: 0, scale: 0.9 },
+      {
+        scrollTrigger: {
+          trigger: '.gallery-grid',
+          start: 'top 85%',
+          end: 'top 40%',
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.05,
+        ease: 'power3.out'
+      }
+    );
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active state
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-[#2C786C]/20', 'text-[#2C786C]', 'border-[#2C786C]/30'));
+        filterBtns.forEach(b => b.classList.add('bg-white/5', 'text-white/60', 'border-white/10'));
+        btn.classList.remove('bg-white/5', 'text-white/60', 'border-white/10');
+        btn.classList.add('active', 'bg-[#2C786C]/20', 'text-[#2C786C]', 'border-[#2C786C]/30');
+
+        // Filter items
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            gsap.to(item, { opacity: 1, scale: 1, duration: 0.3 });
+            (item as HTMLElement).style.display = '';
+          } else {
+            gsap.to(item, { opacity: 0, scale: 0.8, duration: 0.3, onComplete: () => {
+              (item as HTMLElement).style.display = 'none';
+            }});
+          }
+        });
+      });
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (lightbox && lightboxContent) {
+          const img = item.querySelector('img');
+          if (img) {
+            lightboxContent.innerHTML = `<img src="${img.src}" alt="${img.alt}" class="max-w-full max-h-[80vh] object-contain rounded-lg" />`;
+          }
+          lightbox.classList.remove('hidden');
+          lightbox.classList.add('flex');
+        }
+      });
+    });
+
+    lightboxClose?.addEventListener('click', () => {
+      lightbox?.classList.add('hidden');
+      lightbox?.classList.remove('flex');
+    });
+  });
+</script>
+
+<style>
+  .text-gradient-green {
+    background: linear-gradient(135deg, #2C786C 0%, #4B3F72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>

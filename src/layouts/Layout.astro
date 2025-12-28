@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Awakened AI - Multi-brand creative studio for neurodivergent minds. Fashion, productivity tools, content, and applications." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4B3F72" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Atkinson Hyperlegible Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Different minds deserve different tools—and better stories." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://awknd.me/work" />
+
+    <title>{title}</title>
+  </head>
+  <body class="noise">
+    <!-- Gradient orbs background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <slot />
+
+    <!-- GSAP Initialization -->
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      // Make available globally for component scripts
+      window.gsap = gsap;
+      window.ScrollTrigger = ScrollTrigger;
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  }
+</style>
